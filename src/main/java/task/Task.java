@@ -1,8 +1,46 @@
 package task;
 public class Task {
-    private boolean taskDone = false;
-    private String taskName;
-    private int taskNum;
+    protected boolean taskDone = false;
+    protected String taskName;
+    protected int taskNum;
+    protected enum taskType{
+        T, D, E;
+    }
+
+    protected taskType currentTaskType;
+
+    public Task(){}
+    public Task(int taskNumber, String nameOfTask, boolean isTaskDone){
+        this.taskName = nameOfTask;
+        this.taskNum = taskNumber;
+        this.taskDone = isTaskDone;
+    }
+
+    public void setTaskType(String typeOfTask){
+        switch(typeOfTask){
+        case "T": currentTaskType = taskType.T;
+            break;
+        case "D": currentTaskType = taskType.D;
+            break;
+        case "E": currentTaskType = taskType.E;
+            break;
+        default: break;
+        }
+    }
+
+    public String getCurrentTaskType() {
+        String currTaskType = "Unknown";
+        switch(currentTaskType){
+        case T: currTaskType = "T";
+            break;
+        case D: currTaskType = "D";
+            break;
+        case E: currTaskType = "E";
+            break;
+        default: break;
+        }
+         return currTaskType;
+    }
 
     public void setTaskStatus(boolean isItDone){ //setter
         taskDone = isItDone;
@@ -26,4 +64,17 @@ public class Task {
     public int getTaskNum(){        //getter
         return taskNum;
     }
+
+
+    public String taskStatus() {
+        if (isTaskDone()) {   //determines whether a task is done and sets a tick or cross
+            return "✓";
+        }
+        else if (!isTaskDone()) {
+            return "✗";
+        }
+        return "Unknown";
+    }
+
 }
+
