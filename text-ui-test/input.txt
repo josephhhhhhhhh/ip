@@ -1,3 +1,10 @@
-todo kick butt /by thursday
-deadline find true love /by friday
-deadline find true love /at work
+list
+say hi bro
+todo get work done
+deadline look for someone /by tomorrow
+event kick ball /at tembu
+events testing events vs event command /at tembu
+list
+done 5
+list
+bye

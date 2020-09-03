@@ -4,7 +4,7 @@ public class Task {
     protected String taskName;
     protected int taskNum;
     protected enum taskType{
-        T, D, E;
+        T, D, E, G; //T is todos, d is deadlines, e is events, g is generic
     }
 
     protected taskType currentTaskType;
@@ -24,7 +24,10 @@ public class Task {
             break;
         case "E": currentTaskType = taskType.E;
             break;
-        default: break;
+        case "G": currentTaskType = taskType.G;
+            break;
+        default:
+            break;
         }
     }
 
@@ -37,6 +40,7 @@ public class Task {
             break;
         case E: currTaskType = "E";
             break;
+        case G: currTaskType = "G";
         default: break;
         }
          return currTaskType;
@@ -70,10 +74,9 @@ public class Task {
         if (isTaskDone()) {   //determines whether a task is done and sets a tick or cross
             return "✓";
         }
-        else if (!isTaskDone()) {
+        else {
             return "✗";
         }
-        return "Unknown";
     }
 
 }

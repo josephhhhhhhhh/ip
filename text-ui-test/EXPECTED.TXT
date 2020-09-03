@@ -10,17 +10,49 @@ Hello! I'm Duke
 What can I do for you?
 ____________________________________________________________
 ____________________________________________________________
-Got it. I've added this task: 
-  [T][✗] kick butt (by: thursday)
-Now you have 1 task in the list.
+Here are the tasks in your list:
 ____________________________________________________________
-___________________________________________________________
+____________________________________________________________
+added: say hi bro
+____________________________________________________________
+____________________________________________________________
 Got it. I've added this task: 
-  [D][✗] find true love (by: friday) 
+  [T][✗] get work done
 Now you have 2 tasks in the list.
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this task: 
-  [D][✗] find true love (at: work)
+  [D][✗] look for someone (by: tomorrow)
 Now you have 3 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task: 
+  [E][✗] kick ball (at: tembu)
+Now you have 4 tasks in the list.
+____________________________________________________________
+____________________________________________________________
+added: events testing events vs event command /at tembu
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[G][✗] say hi bro
+2.[T][✗] get work done
+3.[D][✗] look for someone 
+4.[E][✗] kick ball 
+5.[G][✗] events testing events vs event command /at tembu
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done: 
+  [✓] events testing events vs event command /at tembu
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[G][✗] say hi bro
+2.[T][✗] get work done
+3.[D][✗] look for someone 
+4.[E][✗] kick ball 
+5.[G][✓] events testing events vs event command /at tembu
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon!
 ____________________________________________________________
