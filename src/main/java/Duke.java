@@ -50,7 +50,7 @@ public class Duke {
             }
 
             recordedTask[orderAdded-1] = new Task(orderAdded, commandEntered, false);
-            orderAdded = genericTaskAdder(orderAdded, recordedTask, commandEntered);
+            orderAdded = genericTaskAdder(orderAdded, recordedTask);
 
         }
         printByeMessage(); //message to bid farewell to users
@@ -86,14 +86,15 @@ public class Duke {
             break;
         default:
             recordedTask[orderAdded-1] = new Task(orderAdded, commandEntered, false);
-            orderAdded = genericTaskAdder(orderAdded, recordedTask, commandEntered);
+            orderAdded = genericTaskAdder(orderAdded, recordedTask);
             return orderAdded;
            // break;
         }
+        recordedTask[orderAdded-1].setTaskName(taskCommandArr[1] + exactDueDate);
 
         System.out.println(LINE_DIVIDER);
         System.out.println("Got it. I've added this task: ");
-        System.out.println("  [" + recordedTask[orderAdded -1].getCurrentTaskType() + "][" + recordedTask[orderAdded -1].taskStatus() + "] " + taskCommandArr[1] + exactDueDate);
+        System.out.println("  [" + recordedTask[orderAdded -1].getCurrentTaskType() + "][" + recordedTask[orderAdded -1].taskStatus() + "] " + recordedTask[orderAdded-1].getTaskName());
         if (orderAdded == 1){
             System.out.println("Now you have " + orderAdded + " task in the list.");
         }
@@ -125,7 +126,7 @@ public class Duke {
         System.out.println(LINE_DIVIDER);
     }
 
-    private static int genericTaskAdder(int orderAdded, Task[] recordedTask, String commandEntered) {
+    private static int genericTaskAdder(int orderAdded, Task[] recordedTask) {
         recordedTask[orderAdded -1].setTaskType("G");
         System.out.println(LINE_DIVIDER);
         recordedTask[orderAdded-1].setTaskNum(orderAdded); //sets the task number of the task added
