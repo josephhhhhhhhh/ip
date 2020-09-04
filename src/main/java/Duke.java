@@ -8,10 +8,11 @@ import task.ToDos;
 
 public class Duke {
     public static final String LINE_DIVIDER = "____________________________________________________________";
+    public static final int TASK_ARRAY_SIZE = 100;
     public static void main(String[] args) {
 
-        int orderAdded = 1;
-        Task[] recordedTask = new Task[100];
+        int orderAdded = 1; //the first object to be added will be of rank 1, hence initialise this var with 1
+        Task[] recordedTask = new Task[TASK_ARRAY_SIZE];
 
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -24,34 +25,29 @@ public class Duke {
         printHelloMessage(); //message to welcome users
 
         Scanner in = new Scanner(System.in);
-
         while(true) {
             String commandEntered = in.nextLine(); //awaits user input for the command
 
-
             if(commandEntered.contains("todo") ||
                     commandEntered.contains("deadline") ||
-                    commandEntered.contains("event")){
+                    commandEntered.contains("event")) {
 
                 orderAdded = specificTaskAdder(orderAdded, recordedTask, commandEntered);
                 continue;
             }
-
-            if(commandEntered.equals("list")){        //command list lists out all recorded words
+            if(commandEntered.equals("list")) {        //command list lists out all recorded words
                 listOfTasksPrinter(orderAdded, recordedTask);
                 continue;
             }
-            if(commandEntered.contains("done ")){      //command done<space>(number) changes task status of a task from not done to done i.e cross to tick
+            if(commandEntered.contains("done ")) {      //command done<space>(number) changes task status of a task from not done to done i.e cross to tick
                 setTaskAsDone(commandEntered, recordedTask);
                 continue;
             }
-            if(commandEntered.equals("bye")){ //command bye breaks the loop and ends the interaction with Dukebot
+            if(commandEntered.equals("bye")) { //command bye breaks the loop and ends the interaction with Dukebot
                 break;
             }
-
             recordedTask[orderAdded-1] = new Task(orderAdded, commandEntered, false);
             orderAdded = genericTaskAdder(orderAdded, recordedTask);
-
         }
         printByeMessage(); //message to bid farewell to users
     }
@@ -59,19 +55,19 @@ public class Duke {
     private static int specificTaskAdder(int orderAdded, Task[] recordedTask, String commandEntered) {
         String[] taskCommandArr = commandEntered.split(" ", 2);
         String exactDueDate = "";
-        if(taskCommandArr[1].contains("/by")){
+        if(taskCommandArr[1].contains("/by")) {
             String taskDueDateString = taskCommandArr[1];
             String[] taskDueDateArr = taskDueDateString.split("/by", 2);
             exactDueDate = "(by:" + taskDueDateArr[1] + ")";
             taskCommandArr[1] = taskDueDateArr[0];
         }
-        else if(taskCommandArr[1].contains("/at")){
+        else if(taskCommandArr[1].contains("/at")) {
             String taskDueDateString = taskCommandArr[1];
             String[] taskDueDateArr = taskDueDateString.split("/at", 2);
             exactDueDate = "(at:" + taskDueDateArr[1] + ")";
             taskCommandArr[1] = taskDueDateArr[0];
         }
-        switch(taskCommandArr[0]){
+        switch(taskCommandArr[0]) {
         case "todo":
             recordedTask[orderAdded -1] = new ToDos(orderAdded, taskCommandArr[1], false);
             recordedTask[orderAdded -1].setTaskType("T");
@@ -95,7 +91,7 @@ public class Duke {
         System.out.println(LINE_DIVIDER);
         System.out.println("Got it. I've added this task: ");
         System.out.println("  [" + recordedTask[orderAdded -1].getCurrentTaskType() + "][" + recordedTask[orderAdded -1].taskStatus() + "] " + recordedTask[orderAdded-1].getTaskName());
-        if (orderAdded == 1){
+        if (orderAdded == 1) {
             System.out.println("Now you have " + orderAdded + " task in the list.");
         }
         else {
