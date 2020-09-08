@@ -4,7 +4,7 @@ public class Task {
     protected String taskName;
     protected int taskNum;
     protected enum taskType {
-        D, E, G, T; //T is todos, d is deadlines, e is events, g is generic
+        D, E, G, T //T is todos, d is deadlines, e is events, g is generic
     }
     protected taskType currentTaskType;
 
@@ -49,33 +49,44 @@ public class Task {
         taskDone = isItDone;
     }
 
-    public boolean isTaskDone(){              //getter
+    public boolean isTaskDone(){                //getter
         return taskDone;
     }
 
-    public void setTaskName(String name) { //setter
+    public void setTaskName(String name) {      //setter
         taskName = name;
     }
 
-    public String getTaskName() {          //getter
+    public String getTaskName() {               //getter
         return taskName;
     }
 
-    public void setTaskNum(int num) { //setter
+    public void setTaskNum(int num) {           //setter
         taskNum = num;
     }
 
-    public int getTaskNum() {        //getter
+    public int getTaskNum() {                   //getter
         return taskNum;
     }
 
     public String taskStatus() {
         if (isTaskDone()) {   //determines whether a task is done and sets a tick or cross
             return "✓";
-        }
-        else {
+        } else {
             return "✗";
         }
+    }
+
+    public void printTaskListing(){
+        System.out.println(" [" + getCurrentTaskType() + "][" + taskStatus() + "] " + getTaskName());
+    }
+
+    public void markedAsDone(){
+        System.out.println("  [✓] " + getTaskName());
+    }
+
+    public void printEntireTaskList() {
+        System.out.println(getTaskNum() + ".[" + getCurrentTaskType() + "]" + "[" + taskStatus() + "] " + getTaskName());
     }
 }
 
