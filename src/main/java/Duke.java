@@ -8,8 +8,10 @@ import task.ToDos;
 
 public class Duke {
     public static final String LINE_DIVIDER = "____________________________________________________________";
+    public static final String HELLO_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
+    public static final String BYE_MESSAGE = "Bye. Hope to see you again soon!";
     public static final int TASK_ARRAY_SIZE = 100;
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DukeException {
 
         int orderAdded = 1; //the first object to be added will be of rank 1, hence initialise this var with 1
         Task[] recordedTask = new Task[TASK_ARRAY_SIZE];
@@ -46,26 +48,41 @@ public class Duke {
             if(commandEntered.equals("bye")) { //command bye breaks the loop and ends the interaction with Dukebot
                 break;
             }
-            recordedTask[orderAdded-1] = new Task(orderAdded, commandEntered, false);
-            orderAdded = genericTaskAdder(orderAdded, recordedTask);
+            //recordedTask[orderAdded-1] = new Task(orderAdded, commandEntered, false);
+            //orderAdded = genericTaskAdder(orderAdded, recordedTask);
+
+            try{
+                throw new DukeException();
+            } catch (DukeException de) {
+                printUnrecognisedCommandErrorMessage();
+            }
+
         }
         printByeMessage(); //message to bid farewell to users
     }
 
-    private static int specificTaskAdder(int orderAdded, Task[] recordedTask, String commandEntered) {
+    private static int specificTaskAdder(int orderAdded, Task[] recordedTask, String commandEntered) throws DukeException {
         String[] taskCommandArr = commandEntered.split(" ", 2);
         String exactDueDate = "";
-        if(taskCommandArr[1].contains("/by")) {
-            String taskDueDateString = taskCommandArr[1];
-            String[] taskDueDateArr = taskDueDateString.split("/by", 2);
-            exactDueDate = "(by:" + taskDueDateArr[1] + ")";
-            taskCommandArr[1] = taskDueDateArr[0];
-        }
-        else if(taskCommandArr[1].contains("/at")) {
-            String taskDueDateString = taskCommandArr[1];
-            String[] taskDueDateArr = taskDueDateString.split("/at", 2);
-            exactDueDate = "(at:" + taskDueDateArr[1] + ")";
-            taskCommandArr[1] = taskDueDateArr[0];
+
+        try {
+            if(taskCommandArr.length <= 1){
+                throw new DukeException();
+            }
+            if (taskCommandArr[1].contains("/by")) {
+                String taskDueDateString = taskCommandArr[1];
+                String[] taskDueDateArr = taskDueDateString.split("/by", 2);
+                exactDueDate = "(by:" + taskDueDateArr[1] + ")";
+                taskCommandArr[1] = taskDueDateArr[0];
+            } else if (taskCommandArr[1].contains("/at")) {
+                String taskDueDateString = taskCommandArr[1];
+                String[] taskDueDateArr = taskDueDateString.split("/at", 2);
+                exactDueDate = "(at:" + taskDueDateArr[1] + ")";
+                taskCommandArr[1] = taskDueDateArr[0];
+            }
+        } catch (DukeException de) {
+            printEmptyTodoErrorMessage();
+            return orderAdded;
         }
         switch(taskCommandArr[0]) {
         case "todo":
@@ -90,11 +107,10 @@ public class Duke {
 
         System.out.println(LINE_DIVIDER);
         System.out.println("Got it. I've added this task: ");
-        System.out.println("  [" + recordedTask[orderAdded -1].getCurrentTaskType() + "][" + recordedTask[orderAdded -1].taskStatus() + "] " + recordedTask[orderAdded-1].getTaskName());
+        recordedTask[orderAdded-1].printTaskListing();
         if (orderAdded == 1) {
             System.out.println("Now you have " + orderAdded + " task in the list.");
-        }
-        else {
+        } else {
             System.out.println("Now you have " + orderAdded + " tasks in the list.");
         }
         System.out.println(LINE_DIVIDER);
@@ -102,12 +118,24 @@ public class Duke {
         return orderAdded;
     }
 
+    private static void printEmptyTodoErrorMessage() {
+        System.out.println(LINE_DIVIDER);
+        System.out.println("☹ OOPS!!! The description of a todo cannot be empty.");
+        System.out.println(LINE_DIVIDER);
+    }
+
+    private static void printUnrecognisedCommandErrorMessage() {
+        System.out.println(LINE_DIVIDER);
+        System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        System.out.println(LINE_DIVIDER);
+    }
+
     private static void listOfTasksPrinter(int orderAdded, Task[] recordedTask) {
         System.out.println(LINE_DIVIDER);
         System.out.println("Here are the tasks in your list:");
 
         for(int i = 0; i< orderAdded -1; i++){
-            System.out.println(recordedTask[i].getTaskNum() + ".[" + recordedTask[i].getCurrentTaskType() + "]" + "[" + recordedTask[i].taskStatus() + "] " + recordedTask[i].getTaskName());
+            recordedTask[orderAdded-1].printEntireTaskList();
         }
         System.out.println(LINE_DIVIDER);
     }
@@ -118,7 +146,7 @@ public class Duke {
         recordedTask[taskNumToChange-1].setTaskStatus(true);
         System.out.println(LINE_DIVIDER);
         System.out.println("Nice! I've marked this task as done: ");
-        System.out.println("  [✓] " + recordedTask[taskNumToChange-1].getTaskName());
+        recordedTask[taskNumToChange-1].markedAsDone();
         System.out.println(LINE_DIVIDER);
     }
 
@@ -135,14 +163,13 @@ public class Duke {
 
     private static void printHelloMessage() {
         System.out.println(LINE_DIVIDER);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        System.out.println(HELLO_MESSAGE);
         System.out.println(LINE_DIVIDER);
     }
 
     private static void printByeMessage() {
         System.out.println(LINE_DIVIDER);
-        System.out.println("Bye. Hope to see you again soon!");
+        System.out.println(BYE_MESSAGE);
         System.out.println(LINE_DIVIDER);
     }
 }
