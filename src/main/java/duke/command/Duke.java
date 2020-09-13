@@ -16,15 +16,13 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     public static void main(String[] args) {
-
-        Task[] recordedTask = new Task[TASK_ARRAY_SIZE];
         Parser commandParser = new Parser();
         System.out.println("Hello from\n" + LOGO);
         printHelloMessage(); //message to welcome users
 
         while (commandParser.notBye) {
             String commandEntered = readUserInput();
-            commandParser.parseCommand(commandEntered.toLowerCase(), Parser.orderAdded, recordedTask);
+            commandParser.parseCommand(commandEntered.toLowerCase(), Parser.orderAdded);
         }
     }
 

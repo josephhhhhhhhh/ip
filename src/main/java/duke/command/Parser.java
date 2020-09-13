@@ -18,9 +18,9 @@ public class Parser {
     public static final String MARKED_TASKS_DONE_MESSAGE = "Nice! I've marked this task as done: ";
     protected static int orderAdded = 1;
     protected boolean notBye = true;
-    protected static ArrayList<Task> tasks = new ArrayList<>();
+    protected static ArrayList<Task> recordedTask = new ArrayList<>();
 
-    protected void parseCommand(String commandEntered, int orderAdded, Task[] recordedTask) {
+    protected void parseCommand(String commandEntered, int orderAdded) {
         String[] commandArr = commandEntered.split(" ", 2);
         switch (commandArr[0].toLowerCase()) {
         case "todo":
@@ -47,7 +47,7 @@ public class Parser {
         }
     }
 
-    private static void specificTaskAdder(int orderAdded, Task[] recordedTask, String commandEntered) {
+    private static void specificTaskAdder(int orderAdded, ArrayList<Task> recordedTask, String commandEntered) {
         String[] taskCommandArr = commandEntered.split(" ", 2);
         String exactDueDate = "";
         try {
@@ -70,24 +70,21 @@ public class Parser {
         }
         switch (taskCommandArr[0]) {
         case "todo":
-            recordedTask[orderAdded - 1] = new ToDos(orderAdded, taskCommandArr[1], false, "T");
-            tasks.add(recordedTask[orderAdded-1]);
+            recordedTask.add(new ToDos(orderAdded, taskCommandArr[1], false, "T"));
             break;
         case "deadline":
-            recordedTask[orderAdded - 1] = new Deadlines(orderAdded, taskCommandArr[1], false, "D");
-            tasks.add(recordedTask[orderAdded-1]);
+            recordedTask.add(new Deadlines(orderAdded, taskCommandArr[1], false, "D"));
             break;
         case "event":
-            recordedTask[orderAdded - 1] = new Events(orderAdded, taskCommandArr[1], false, "E");
-            tasks.add(recordedTask[orderAdded-1]);
+            recordedTask.add(new Events(orderAdded, taskCommandArr[1], false, "E"));
             break;
         default:
             break;
         }
-        recordedTask[orderAdded - 1].setTaskName(taskCommandArr[1] + exactDueDate); //formats the output statement as desired
+        recordedTask.get(orderAdded-1).setTaskName(taskCommandArr[1] + exactDueDate); //formats the output statement as desired
         System.out.println(LINE_DIVIDER);
         System.out.println("Got it. I've added this task: ");
-        recordedTask[orderAdded - 1].printTaskListing();
+        recordedTask.get(orderAdded-1).printTaskListing();
         if (orderAdded == 1) {
             System.out.println("Now you have " + orderAdded + " task in the list.");
         } else {
@@ -110,22 +107,31 @@ public class Parser {
         System.out.println(LINE_DIVIDER);
     }
 
-    private static void listOfTasksPrinter(int orderAdded, Task[] recordedTask) {
+    private static void listOfTasksPrinter(int orderAdded, ArrayList<Task> recordedTask) {
         System.out.println(LINE_DIVIDER);
         System.out.println(LIST_TASKS_MESSAGE);
         for (int i = 0; i < orderAdded - 1; i++) {
-            recordedTask[i].printEntireTaskList();
+            recordedTask.get(i).printEntireTaskList();
         }
         System.out.println(LINE_DIVIDER);
     }
 
-    private static void setTaskAsDone(String commandEntered, Task[] recordedTask) {
-        String taskNumToCheck = commandEntered.substring(5);
-        int taskNumToChange = Integer.parseInt(taskNumToCheck);
-        recordedTask[taskNumToChange - 1].setTaskStatus(true);
+    private static void setTaskAsDone(String commandEntered, ArrayList<Task> recordedTask) {
+        try{
+            if(!commandEntered.substring(6).equals("")){
+                throw new DukeException();
+            }
+        }
+        catch(DukeException de) {
+            printUnrecognisedCommandErrorMessage();
+            return;
+        }
+        char taskNumToCheck = commandEntered.charAt(5);
+        int taskNumToChange = Character.getNumericValue(taskNumToCheck);
+        recordedTask.get(taskNumToChange-1).setTaskStatus(true);
         System.out.println(LINE_DIVIDER);
         System.out.println(MARKED_TASKS_DONE_MESSAGE);
-        recordedTask[taskNumToChange - 1].markedAsDone();
+        recordedTask.get(taskNumToChange-1).markedAsDone();
         System.out.println(LINE_DIVIDER);
     }
 
@@ -135,20 +141,28 @@ public class Parser {
         System.out.println(LINE_DIVIDER);
     }
 
-    protected static void deleteTask(String commandEntered, Task[] recordedTask){
-        String taskNumToCheck = commandEntered.substring(7);
-        int taskNumToChange = Integer.parseInt(taskNumToCheck);
+    protected static void deleteTask(String commandEntered, ArrayList<Task> recordedTask){
+        try{
+            if(!commandEntered.substring(8).equals("")){
+                throw new DukeException();
+            }
+        }
+        catch(DukeException de) {
+            printUnrecognisedCommandErrorMessage();
+            return;
+        }
+        char taskNumToCheck = commandEntered.charAt(7);
+        int taskNumToChange = Character.getNumericValue(taskNumToCheck);
         System.out.println(LINE_DIVIDER + "\nNoted. I've removed this task:");
-        recordedTask[taskNumToChange-1].printTaskListing();
+        recordedTask.get(taskNumToChange-1).printTaskListing();
         for(int i=taskNumToChange; i<orderAdded-1; i++){
-            recordedTask[i-1] = recordedTask[i];
-            recordedTask[i-1].setTaskNum(i);
+            recordedTask.get(i-1).setTaskNum(i);
         }
         orderSubtractor();
         String lastPartOfStatement = (orderAdded==1)?" task in the list.":" tasks in the list.";
         System.out.println("Now you have " + (orderAdded-1) + lastPartOfStatement);
         System.out.println(LINE_DIVIDER);
-        tasks.remove(recordedTask[taskNumToChange-1]);
+        recordedTask.remove(recordedTask.get(taskNumToChange-1));
     }
 
     protected static void orderAdder() {
@@ -156,6 +170,10 @@ public class Parser {
     }
     protected static void orderSubtractor() {
         orderAdded--;
+    }
+
+    public void addNewTask(Task newTask){
+        recordedTask.add(newTask);
     }
 
 }

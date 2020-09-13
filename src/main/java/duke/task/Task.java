@@ -18,10 +18,8 @@ public class Task {
         this.taskDone = isTaskDone;
         setTaskType(type);
     }
-    ArrayList<Task> tasks = new ArrayList<>();
-    public void addNewTask(Task newTask){
-        this.tasks.add(newTask);
-    }
+
+
     public void setTaskType(String typeOfTask) {
         switch(typeOfTask) {
         case "T": currentTaskType = taskType.T;
