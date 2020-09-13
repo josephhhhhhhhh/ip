@@ -1,5 +1,7 @@
 package duke.command;
 
+
+import java.io.IOException;
 import java.util.Scanner;
 import duke.task.Deadlines;
 import duke.task.Events;
@@ -29,6 +31,7 @@ public class Duke {
 
 
         System.out.println("Hello from\n" + logo);
+        //System.out.println("Working Directory = " + System.getProperty("user.dir"));
         printHelloMessage(); //message to welcome users
 
         Scanner in = new Scanner(System.in);
@@ -40,6 +43,15 @@ public class Duke {
                     commandEntered.toLowerCase().contains("event ")) {
 
                 orderAdded = specificTaskAdder(orderAdded, recordedTask, commandEntered);
+                String lineToSave = recordedTask[orderAdded-2].getCurrentTaskType()
+                                    + " | " + recordedTask[orderAdded-2].taskStatus() + " | "
+                                    + recordedTask[orderAdded-2].getTaskName() + "\n";
+                try {
+                    Save.appendToFile("data/duke.txt", lineToSave);
+                }
+                catch (IOException ioe){
+                    System.out.println("IOException error u wanker");
+                }
                 continue;
             }
             if(commandEntered.toLowerCase().equals("list")) {         //command list lists out all recorded words
@@ -48,6 +60,18 @@ public class Duke {
             }
             if(commandEntered.toLowerCase().contains("done ")) {      //command done<space>(number) changes task status of a task from not done to done i.e cross to tick
                 setTaskAsDone(commandEntered, recordedTask);
+                String lineToSave1 = "";
+                for(int i = 0; i < orderAdded - 1; i++){
+                    lineToSave1 = lineToSave1.concat(recordedTask[i].getCurrentTaskType()
+                            + " | " + recordedTask[i].taskStatus() + " | "
+                            + recordedTask[i].getTaskName() + "\n");
+                }
+                try {
+                    Save.writeToFile("data/duke.txt", lineToSave1);
+                }
+                catch (IOException ioe){
+                    System.out.println("IOException error u wanker");
+                }
                 continue;
             }
             if(commandEntered.toLowerCase().equals("bye")) {          //command bye breaks the loop and ends the interaction with Dukebot
