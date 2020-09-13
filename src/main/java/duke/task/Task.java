@@ -73,9 +73,9 @@ public class Task {
 
     public String taskStatus() {
         if (isTaskDone()) {   //determines whether a duke.task is done and sets a tick or cross
-            return "✓";
+            return "\u2713";
         } else {
-            return "✗";
+            return "\u2717";
         }
     }
 
@@ -84,7 +84,7 @@ public class Task {
     }
 
     public void markedAsDone(){
-        System.out.println("  [✓] " + getTaskName());
+        System.out.println("  [\u2713] " + getTaskName());
     }
 
     public void printEntireTaskList() {
