@@ -1,4 +1,7 @@
 package duke.task;
+
+import java.util.ArrayList;
+
 public class Task {
     protected boolean taskDone = false;
     protected String taskName;
@@ -15,6 +18,7 @@ public class Task {
         this.taskDone = isTaskDone;
         setTaskType(type);
     }
+
 
     public void setTaskType(String typeOfTask) {
         switch(typeOfTask) {
