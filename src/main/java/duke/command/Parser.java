@@ -28,9 +28,9 @@ public class Parser {
         case "deadline":
         case "event":
             specificTaskAdder(orderAdded, recordedTask, commandEntered);
-            String lineToSave = recordedTask.get(orderAdded-2).getCurrentTaskType()
-                    + " | " + recordedTask.get(orderAdded-2).taskStatus() + " | "
-                    + recordedTask.get(orderAdded-2).getTaskName() + "\n";
+            String lineToSave = recordedTask.get(orderAdded-1).getCurrentTaskType()
+                    + " | " + recordedTask.get(orderAdded-1).taskStatus() + " | "
+                    + recordedTask.get(orderAdded-1).getTaskName() + "\n";
             try {
                 Save.appendToFile("data/duke.txt", lineToSave);
             }
