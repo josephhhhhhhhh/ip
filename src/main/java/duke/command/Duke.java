@@ -1,28 +1,23 @@
 package duke.command;
 
+import duke.common.Messages;
+
 import java.util.Scanner;
 
 
 
 
 public class Duke {
-    public static final String LINE_DIVIDER = "____________________________________________________________";
-    public static final String HELLO_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
-    public static final int TASK_ARRAY_SIZE = 100;
-    public static final String LOGO = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
 
     public static void main(String[] args) {
         Parser commandParser = new Parser();
-        System.out.println("Hello from\n" + LOGO);
+        System.out.println("Hello from\n" + Messages.LOGO);
         printHelloMessage(); //message to welcome users
 
         while (commandParser.notBye) {
             String commandEntered = readUserInput();
-            commandParser.parseCommand(commandEntered.toLowerCase(), Parser.orderAdded);
+            commandParser.parseCommand(commandEntered.toLowerCase());
+            Parser.firstTimeEntry = false;
         }
     }
 
@@ -32,8 +27,8 @@ public class Duke {
     }
 
     private static void printHelloMessage() {
-        System.out.println(LINE_DIVIDER);
-        System.out.println(HELLO_MESSAGE);
-        System.out.println(LINE_DIVIDER);
+        System.out.println(Messages.LINE_DIVIDER);
+        System.out.println(Messages.HELLO_MESSAGE);
+        System.out.println(Messages.LINE_DIVIDER);
     }
 }
