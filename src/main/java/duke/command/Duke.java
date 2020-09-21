@@ -1,34 +1,50 @@
 package duke.command;
 
 import duke.common.Messages;
-
-import java.util.Scanner;
-
-
+import duke.data.TaskList;
+import duke.ui.TextUi;
 
 
 public class Duke {
 
+    private TextUi ui = new TextUi();
+    private TaskList taskList;
+
     public static void main(String[] args) {
+        new Duke().run();
+    }
+
+    public void run() {
         Parser commandParser = new Parser();
-        System.out.println("Hello from\n" + Messages.LOGO);
-        printHelloMessage(); //message to welcome users
+        taskList = new TaskList();
+        Command command;
+
+        ui.printHelloMessage();
+
+        if (Parser.firstTimeEntry) {
+            int imported = Save.readFromFile(Messages.SAVE_FILE_PATH, taskList);
+            Parser.orderAdded += imported;
+            Parser.firstTimeEntry = false;
+        }
 
         while (commandParser.notBye) {
-            String commandEntered = readUserInput();
-            commandParser.parseCommand(commandEntered.toLowerCase());
-            Parser.firstTimeEntry = false;
+            String commandEntered = ui.readUserInput();
+            command = commandParser.parseCommand(commandEntered.toLowerCase());
+            responseToCommand response = carryOutCommand(command, taskList);
+            ui.showOutcomeToUser(response);
+
         }
     }
 
-    public static String readUserInput() {
-        Scanner in = new Scanner(System.in);
-        return in.nextLine();
+    private responseToCommand carryOutCommand(Command command, TaskList taskList) {
+        try {
+            command.chooseArrayList(taskList);
+            responseToCommand response = command.execute();
+            return response;
+        } catch (Exception e) {
+            ui.showToUser("Error!");
+            throw new RuntimeException(e);
+        }
     }
 
-    private static void printHelloMessage() {
-        System.out.println(Messages.LINE_DIVIDER);
-        System.out.println(Messages.HELLO_MESSAGE);
-        System.out.println(Messages.LINE_DIVIDER);
-    }
 }

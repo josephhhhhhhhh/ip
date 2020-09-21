@@ -6,12 +6,16 @@ public class Task {
     protected boolean taskDone = false;
     protected String taskName;
     protected int taskNum;
+
     protected enum taskType {
         D, E, T //T is todos, d is deadlines, e is events
     }
+
     protected taskType currentTaskType;
 
-    public Task() {}
+    public Task() {
+    }
+
     public Task(int taskNumber, String nameOfTask, boolean isTaskDone, String type) {
         this.taskName = nameOfTask;
         this.taskNum = taskNumber;
@@ -21,12 +25,15 @@ public class Task {
 
 
     public void setTaskType(String typeOfTask) {
-        switch(typeOfTask) {
-        case "T": currentTaskType = taskType.T;
+        switch (typeOfTask) {
+        case "T":
+            currentTaskType = taskType.T;
             break;
-        case "D": currentTaskType = taskType.D;
+        case "D":
+            currentTaskType = taskType.D;
             break;
-        case "E": currentTaskType = taskType.E;
+        case "E":
+            currentTaskType = taskType.E;
             break;
         default:
             break;
@@ -35,23 +42,27 @@ public class Task {
 
     public String getCurrentTaskType() {
         String currTaskType = "Unknown";
-        switch(currentTaskType) {
-        case T: currTaskType = "T";
+        switch (currentTaskType) {
+        case T:
+            currTaskType = "T";
             break;
-        case D: currTaskType = "D";
+        case D:
+            currTaskType = "D";
             break;
-        case E: currTaskType = "E";
+        case E:
+            currTaskType = "E";
             break;
-        default: break;
+        default:
+            break;
         }
-         return currTaskType;
+        return currTaskType;
     }
 
-    public void setTaskStatus(boolean isItDone){ //setter
+    public void setTaskStatus(boolean isItDone) { //setter
         taskDone = isItDone;
     }
 
-    public boolean isTaskDone(){                //getter
+    public boolean isTaskDone() {                //getter
         return taskDone;
     }
 
@@ -79,16 +90,17 @@ public class Task {
         }
     }
 
-    public void printTaskListing(){
-        System.out.println(" [" + getCurrentTaskType() + "][" + taskStatus() + "] " + getTaskName());
+    public String returnTaskListing() {
+        return " [" + getCurrentTaskType() + "][" + taskStatus() + "] " + getTaskName();
     }
 
-    public void markedAsDone(){
+    public void markedAsDone() {
         System.out.println("  [\u2713] " + getTaskName());
     }
 
-    public void printEntireTaskList() {
-        System.out.println(getTaskNum() + ".[" + getCurrentTaskType() + "]" + "[" + taskStatus() + "] " + getTaskName());
+    public String returnMarkedAsDoneStatement() {
+        return "  [\u2713] " + getTaskName();
     }
+
 }
 

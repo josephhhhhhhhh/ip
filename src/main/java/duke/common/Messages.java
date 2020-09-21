@@ -24,6 +24,7 @@ public class Messages {
     public static final String TASK_ADDER_SINGULAR = "Now you have " + Parser.getOrderAdded() + " task in the list.";
     public static final String TASK_ADDER_PLURAL = "Now you have " + Parser.getOrderAdded() + " tasks in the list.";
     public static final String TASK_ADDER_AFFIRMATION = "Got it. I've added this task: ";
+    public static final String FILE_NOT_FOUND_ERROR = "File could not be found.";
 
-    }
+}
 

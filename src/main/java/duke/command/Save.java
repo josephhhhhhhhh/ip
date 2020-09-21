@@ -1,7 +1,10 @@
 package duke.command;
 
+import duke.common.Messages;
+import duke.data.TaskList;
 import duke.task.Deadlines;
 import duke.task.Events;
+import duke.task.Task;
 import duke.task.ToDos;
 
 import java.io.FileWriter;
@@ -9,8 +12,6 @@ import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.IOException;
 import java.util.Scanner; // Import the Scanner class to read text files
-
-import static duke.command.Parser.recordedTask;
 
 public class Save {
 
@@ -26,7 +27,7 @@ public class Save {
         fw.close();
     }
 
-    protected static int readFromFile(String filePath) {
+    protected static int readFromFile(String filePath, TaskList taskList) {
         int i = 0;
         try {
             File myObj = new File(filePath);
@@ -39,16 +40,19 @@ public class Save {
                     isItDone = true;
                 }
                 i++;
+                Task newTask = new Task();
                 if (dataArr[0].contains("T")) {
-                    recordedTask.add(new ToDos(i, dataArr[4], isItDone, dataArr[0]));
+                    newTask = new ToDos(i, dataArr[4], isItDone, dataArr[0]);
                 } else if (dataArr[0].contains("D")) {
-                    recordedTask.add(new Deadlines(i, dataArr[4], isItDone, dataArr[0]));
+                    newTask = new Deadlines(i, dataArr[4], isItDone, dataArr[0]);
                 } else if (dataArr[0].contains("E")) {
-                    recordedTask.add(new Events(i, dataArr[4], isItDone, dataArr[0]));
+                    newTask = new Events(i, dataArr[4], isItDone, dataArr[0]);
                 }
+                taskList.addTask(newTask);
+
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File could not be found.");
+            System.out.println(Messages.FILE_NOT_FOUND_ERROR);
         }
         return i;
     }
