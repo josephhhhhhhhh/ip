@@ -48,6 +48,8 @@ public class Parser {
         case "bye":
             notBye = false;
             return new ExitCommand();
+        case "find":
+            return new FindCommand(commandEntered);
         default:
             return new IncorrectCommand("unrecognised command");
         }
