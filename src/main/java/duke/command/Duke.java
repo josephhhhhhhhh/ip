@@ -5,6 +5,10 @@ import duke.data.TaskList;
 import duke.ui.TextUi;
 
 
+/**
+ * Start point of the Duke-bot.
+ * Initialises the application and initiates interaction with the user.
+ */
 public class Duke {
 
     private TextUi ui = new TextUi();
@@ -14,6 +18,9 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Runs the program until it is terminated.
+     */
     public void run() {
         Parser commandParser = new Parser();
         taskList = new TaskList();
@@ -36,6 +43,13 @@ public class Duke {
         }
     }
 
+    /**
+     * Carries out the commad and returns the result.
+     *
+     * @param command the user's command
+     * @param taskList  the task list being used
+     * @return the outcome of the execution of the command
+     */
     private ResponseToCommand carryOutCommand(Command command, TaskList taskList) {
         try {
             command.chooseArrayList(taskList);
