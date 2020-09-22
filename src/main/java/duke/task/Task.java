@@ -1,12 +1,13 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Task {
     protected boolean taskDone = false;
     protected String taskName;
     protected int taskNum;
-
+    protected LocalDate deadlineDate;
     protected enum taskType {
         D, E, T //T is todos, d is deadlines, e is events
     }
@@ -21,6 +22,13 @@ public class Task {
         this.taskNum = taskNumber;
         this.taskDone = isTaskDone;
         setTaskType(type);
+    }
+    public Task(int taskNumber, String nameOfTask, boolean isTaskDone, String type, LocalDate deadlineDate) {
+        this.taskName = nameOfTask;
+        this.taskNum = taskNumber;
+        this.taskDone = isTaskDone;
+        setTaskType(type);
+        this.deadlineDate = deadlineDate;
     }
 
 
@@ -100,6 +108,10 @@ public class Task {
 
     public String returnMarkedAsDoneStatement() {
         return "  [\u2713] " + getTaskName();
+    }
+
+    public LocalDate getDeadlineDate() {
+        return deadlineDate;
     }
 
 }

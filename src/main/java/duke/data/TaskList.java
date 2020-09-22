@@ -3,6 +3,7 @@ package duke.data;
 import duke.command.Parser;
 import duke.task.Task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -46,8 +47,26 @@ public class TaskList {
     }
 
     public String markTaskAsDone(int taskNum) {
-        recordedTask.get(taskNum-1).setTaskStatus(true);
-        return recordedTask.get(taskNum-1).returnMarkedAsDoneStatement();
+        recordedTask.get(taskNum - 1).setTaskStatus(true);
+        return recordedTask.get(taskNum - 1).returnMarkedAsDoneStatement();
+    }
+
+    public String matchingDeadlines(LocalDate dateQuery) {
+        String deadlinesMatchingDateQuery = "";
+        ArrayList<Integer> indexNumList = new ArrayList<>();
+        for (Task possibleTask : recordedTask) {
+            try {
+                if (possibleTask.getCurrentTaskType().equals("D") && possibleTask.getDeadlineDate().equals(dateQuery)) {
+                    indexNumList.add(possibleTask.getTaskNum());
+                }
+            } catch (Exception ignored) {
+            }
+        }
+        for (int i = 0; i < indexNumList.size(); i++) {
+            deadlinesMatchingDateQuery = deadlinesMatchingDateQuery.concat((i+1) + ". "
+                    + recordedTask.get(indexNumList.get(i)-1).returnTaskListing()) + ((i==indexNumList.size()-1)?"":"\n");
+        }
+        return "Here are the tasks that are due on the queried date: \n" + deadlinesMatchingDateQuery;
     }
 
 }

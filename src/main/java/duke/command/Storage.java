@@ -11,6 +11,8 @@ import java.io.FileWriter;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner; // Import the Scanner class to read text files
 
 public class Storage {
@@ -43,8 +45,18 @@ public class Storage {
                 Task newTask = new Task();
                 if (dataArr[0].contains("T")) {
                     newTask = new ToDos(i, dataArr[4], isItDone, dataArr[0]);
-                } else if (dataArr[0].contains("D")) {
+                } else if (dataArr[0].contains("D") && !dataArr[4].contains("(by:")) {
                     newTask = new Deadlines(i, dataArr[4], isItDone, dataArr[0]);
+                } else if (dataArr[0].contains("D") && dataArr[4].contains("(by:")){
+                    try {
+                        String[] dateArr = dataArr[4].split("by:", 2);
+                        String exactDate = dateArr[1].trim().substring(0, dateArr[1].indexOf(")")-1).trim();
+                        DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+                        LocalDate formattedDate = LocalDate.parse(exactDate, dtFormatter);
+                        newTask = new Deadlines(i, dataArr[4], isItDone, dataArr[0], formattedDate);
+                    } catch (Exception e) {
+                        newTask = new Deadlines(i, dataArr[4], isItDone, dataArr[0]);
+                    }
                 } else if (dataArr[0].contains("E")) {
                     newTask = new Events(i, dataArr[4], isItDone, dataArr[0]);
                 }
