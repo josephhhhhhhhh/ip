@@ -1,5 +1,8 @@
 package duke.task;
 
+/**
+ * A specific type of task to indicate the task is a ToDo.
+ */
 public class ToDos extends Task {
     public ToDos() {
     }

@@ -4,6 +4,9 @@ import duke.common.Messages;
 
 import java.io.IOException;
 
+/**
+ * Marks a task listing as completed, according to the index number of the task passed.
+ */
 public class DoneCommand extends Command {
 
     int taskNumToChange;

@@ -2,6 +2,9 @@ package duke.command;
 
 import duke.common.Messages;
 
+/**
+ * Prints an error statement as a command was mistyped, or because the command was left incomplete.
+ */
 public class IncorrectCommand extends Command {
     String typeOfIncorrectCommand;
     String commandType;
