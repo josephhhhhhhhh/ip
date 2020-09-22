@@ -2,7 +2,9 @@ package duke.command;
 
 import duke.common.Messages;
 
-
+/**
+ * Searches for commands by using a queried keyword.
+ */
 public class FindCommand extends Command {
     String keyword;
     String searchResult;

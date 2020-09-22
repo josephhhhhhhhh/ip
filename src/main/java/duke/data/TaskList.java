@@ -78,6 +78,11 @@ public class TaskList {
         return recordedTask.get(taskNum - 1).returnMarkedAsDoneStatement();
     }
 
+    /**
+     * Iterates through all tasks in the Task List to find deadlines due by the given query date.
+     * @param dateQuery date of deadline being searched for
+     * @return String containing a list of all the deadlines that have that date as a deadline
+     */
     public String matchingDeadlines(LocalDate dateQuery) {
         String deadlinesMatchingDateQuery = "";
         ArrayList<Integer> indexNumList = new ArrayList<>();
@@ -97,6 +102,12 @@ public class TaskList {
 
     }
 
+    /**
+     * Iterates through the tasks to locate for tasks with names containing the keyword.
+     *
+     * @param keyword the queried keyword being searched for
+     * @return String containing a list of tasks with the keyword in their names
+     */
     public String findKeywords(String keyword) {
         String searchResult = "";
         ArrayList<Integer> indexNumList = new ArrayList<>();

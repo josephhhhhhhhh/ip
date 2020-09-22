@@ -103,6 +103,12 @@ public class Parser {
         return taskNameFinal;
     }
 
+    /**
+     * Extracts the deadline as a LocalDate from a string containing the date.
+     *
+     * @param commandEntered String containing user input
+     * @return the data for the deadline date of type LocalDate
+     */
     public LocalDate deadlineExtractor(String commandEntered) {
         String[] taskCommandArr = commandEntered.split(" ", 2);
         String formattedDate = "";

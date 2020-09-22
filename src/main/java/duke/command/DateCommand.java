@@ -2,6 +2,9 @@ package duke.command;
 
 import java.time.LocalDate;
 
+/**
+ * Searches for deadlines due on a queried date.
+ */
 public class DateCommand extends Command {
     LocalDate dateQuery;
 
