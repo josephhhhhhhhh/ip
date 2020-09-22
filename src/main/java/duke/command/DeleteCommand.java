@@ -4,7 +4,9 @@ import duke.common.Messages;
 
 import java.io.IOException;
 
-
+/**
+ * Deletes a task listing from the Task List according to the index number of the task passed.
+ */
 public class DeleteCommand extends Command {
     int taskNumToChange;
 
