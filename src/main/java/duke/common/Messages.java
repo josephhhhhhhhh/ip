@@ -29,7 +29,6 @@ public class Messages {
     public static final String TASK_ADDER_AFFIRMATION = "Got it. I've added this task: ";
     public static final String FILE_NOT_FOUND_ERROR = "File could not be found.";
     public static final String DONE_COMMAND_ERROR = "ERROR: done command has malfunctioned.";
-    public static final String FIND_COMMAND_ERROR = "ERROR: find command has malfunctioned.";
     public static final String DELETE_COMMAND_ERROR = "ERROR: delete command has malfunctioned.";
     public static final String CARRY_OUT_COMMAND_ERROR = "ERROR: carryOutCommand has malfunctioned.\nReturning you to the \"Enter command: \" prompt...";
 
