@@ -1,8 +1,12 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 /**
  * Constructs a generic task, consisting of an index number, task description (AKA task name), task type as well as task completion status.
  */
+
 public class Task {
     /**
      * An indicator of task completion.
@@ -16,6 +20,9 @@ public class Task {
      * The index number of task in the list.
      */
     protected int taskNum;
+
+    protected LocalDate deadlineDate;
+
 
     /**
      * An enumeration of the various specific types of tasks.
@@ -37,6 +44,13 @@ public class Task {
         this.taskNum = taskNumber;
         this.taskDone = isTaskDone;
         setTaskType(type);
+    }
+    public Task(int taskNumber, String nameOfTask, boolean isTaskDone, String type, LocalDate deadlineDate) {
+        this.taskName = nameOfTask;
+        this.taskNum = taskNumber;
+        this.taskDone = isTaskDone;
+        setTaskType(type);
+        this.deadlineDate = deadlineDate;
     }
 
     /**
@@ -166,6 +180,10 @@ public class Task {
      */
     public String returnMarkedAsDoneStatement() {
         return "  [\u2713] " + getTaskName();
+    }
+
+    public LocalDate getDeadlineDate() {
+        return deadlineDate;
     }
 
 }
