@@ -2,6 +2,9 @@ package duke.common;
 
 import duke.command.Parser;
 
+/**
+ * Contains the final strings of all magic literals used.
+ */
 public class Messages {
     public static final String LINE_DIVIDER = "____________________________________________________________";
     public static final String HELLO_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";

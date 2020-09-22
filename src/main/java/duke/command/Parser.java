@@ -1,16 +1,26 @@
 package duke.command;
 
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Parses user input.
+ */
 public class Parser {
     public Parser() {
-    } //constructor
+    }
 
     protected static int orderAdded = 0;
     protected boolean notBye = true;
     protected static boolean firstTimeEntry = true;
 
+    /**
+     * Parses user input into a command to be carried out.
+     *
+     * @param commandEntered the command input by the user
+     * @return the corresponding command according to the user input
+     */
     protected Command parseCommand(String commandEntered) {
 
         String[] commandArr = commandEntered.trim().split(" ", 2);
@@ -55,6 +65,12 @@ public class Parser {
         return orderAdded;
     }
 
+    /**
+     * Formats the task name for a new task to be added into the Task List.
+     *
+     * @param commandEntered the command input by the user
+     * @return a string containing the task name in correct formatting
+     */
     public String taskNameFormatter(String commandEntered) {
         String[] taskCommandArr = commandEntered.split(" ", 2);
         String exactDueDate = "";
@@ -105,6 +121,12 @@ public class Parser {
         return dateSet;
     }
 
+    /**
+     * Extracts the task type from the command entered.
+     *
+     * @param commandEntered the command input by the user
+     * @return a string containing the letter representing the task type
+     */
     public String taskTypeDecoder(String commandEntered) {
         String[] taskCommandArr = commandEntered.split(" ", 2);
         switch (taskCommandArr[0]) {
