@@ -1,6 +1,6 @@
 package duke.ui;
 
-import duke.command.responseToCommand;
+import duke.command.ResponseToCommand;
 import duke.common.Messages;
 
 import java.io.InputStream;
@@ -30,7 +30,7 @@ public class TextUi {
         out.println(Messages.LINE_DIVIDER + "\n" + message + "\n" + Messages.LINE_DIVIDER);
     }
 
-    public void showOutcomeToUser(responseToCommand response){
+    public void showOutcomeToUser(ResponseToCommand response){
         showToUser(response.replyToUser);
     }
 

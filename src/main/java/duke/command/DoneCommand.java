@@ -9,19 +9,23 @@ public class DoneCommand extends Command {
     int taskNumToChange;
 
     public DoneCommand(String commandEntered) {
-        String taskNumToCheck = commandEntered.substring(5);
-        taskNumToChange = Integer.parseInt(taskNumToCheck);
+        try {
+            String taskNumToCheck = commandEntered.substring(5);
+            taskNumToChange = Integer.parseInt(taskNumToCheck);
+        } catch (Exception e) {
+            System.out.println(Messages.DONE_COMMAND_ERROR);
+        }
     }
 
-    public responseToCommand execute() {
+    public ResponseToCommand execute() {
         String messageOutput = Messages.MARKED_TASKS_DONE_MESSAGE + "\n"
                 + taskList.markTaskAsDone(taskNumToChange);
         String updatedText = taskList.updateTaskToFile();
         try {
-            Save.writeToFile(Messages.SAVE_FILE_PATH, updatedText);
+            Storage.writeToFile(Messages.SAVE_FILE_PATH, updatedText);
         } catch (IOException ioe) {
             System.out.println(Messages.IOEXCEPTION_ERROR);
         }
-        return new responseToCommand(messageOutput, taskList);
+        return new ResponseToCommand(messageOutput, taskList);
     }
 }

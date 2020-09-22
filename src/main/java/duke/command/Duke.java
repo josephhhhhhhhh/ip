@@ -22,7 +22,7 @@ public class Duke {
         ui.printHelloMessage();
 
         if (Parser.firstTimeEntry) {
-            int imported = Save.readFromFile(Messages.SAVE_FILE_PATH, taskList);
+            int imported = Storage.readFromFile(Messages.SAVE_FILE_PATH, taskList);
             Parser.orderAdded += imported;
             Parser.firstTimeEntry = false;
         }
@@ -30,20 +30,19 @@ public class Duke {
         while (commandParser.notBye) {
             String commandEntered = ui.readUserInput();
             command = commandParser.parseCommand(commandEntered.toLowerCase());
-            responseToCommand response = carryOutCommand(command, taskList);
+            ResponseToCommand response = carryOutCommand(command, taskList);
             ui.showOutcomeToUser(response);
 
         }
     }
 
-    private responseToCommand carryOutCommand(Command command, TaskList taskList) {
+    private ResponseToCommand carryOutCommand(Command command, TaskList taskList) {
         try {
             command.chooseArrayList(taskList);
-            responseToCommand response = command.execute();
+            ResponseToCommand response = command.execute();
             return response;
         } catch (Exception e) {
-            ui.showToUser("Error!");
-            throw new RuntimeException(e);
+            return new ResponseToCommand(Messages.CARRY_OUT_COMMAND_ERROR);
         }
     }
 

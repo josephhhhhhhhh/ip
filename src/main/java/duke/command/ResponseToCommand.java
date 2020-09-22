@@ -5,16 +5,16 @@ import duke.task.Task;
 
 import java.util.ArrayList;
 
-public class responseToCommand {
+public class ResponseToCommand {
 
     public final String replyToUser;
     private final TaskList recordedTask;
 
-    public responseToCommand(String replyToUser){
+    public ResponseToCommand(String replyToUser){
         this.replyToUser = replyToUser;
         this.recordedTask = null;
     }
-    public responseToCommand(String replyToUser, TaskList recordedTask) {
+    public ResponseToCommand(String replyToUser, TaskList recordedTask) {
         this.replyToUser = replyToUser;
         this.recordedTask = recordedTask;
     }

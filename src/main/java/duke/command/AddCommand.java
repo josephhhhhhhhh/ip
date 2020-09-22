@@ -29,13 +29,13 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public responseToCommand execute() {
+    public ResponseToCommand execute() {
         taskList.addTask(toAdd);
         String lineToSave = toAdd.getCurrentTaskType()
                 + " | " + toAdd.taskStatus() + " | "
                 + toAdd.getTaskName() + "\n";
         try {
-            Save.appendToFile(Messages.SAVE_FILE_PATH, lineToSave);
+            Storage.appendToFile(Messages.SAVE_FILE_PATH, lineToSave);
         } catch (IOException ioe) {
             System.out.println(Messages.IOEXCEPTION_ERROR);
         }
@@ -43,6 +43,6 @@ public class AddCommand extends Command {
                 + toAdd.returnTaskListing() + "\n"
                 + ((Parser.getOrderAdded() == 1) ? Messages.TASK_ADDER_SINGULAR : Messages.TASK_ADDER_PLURAL);
         Parser.orderAdder();
-        return new responseToCommand(finalMessage);
+        return new ResponseToCommand(finalMessage);
     }
 }

@@ -8,7 +8,7 @@ public class Command {
     protected Command() {
     }
 
-    public responseToCommand execute() {
+    public ResponseToCommand execute() {
         throw new UnsupportedOperationException("This method should be implemented by child classes.");
     }
 

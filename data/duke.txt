@@ -1,3 +1,2 @@
 T | ✓ | hi
-T | ✗ | hihihi
-T | ✗ | 1
+T | ✓ | hihihi

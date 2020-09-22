@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.io.IOException;
 import java.util.Scanner; // Import the Scanner class to read text files
 
-public class Save {
+public class Storage {
 
     protected static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
