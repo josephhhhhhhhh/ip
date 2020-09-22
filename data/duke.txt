@@ -1,4 +1,14 @@
 T | ✓ | hi
+<<<<<<< HEAD
 T | ✗ | book
 T | ✗ | say hi
 T | ✗ | say hi
+=======
+T | ✓ | hihihi
+T | ✗ | something (at: 2019-01-01)
+T | ✗ | smth 
+T | ✗ | smth 
+D | ✗ | smth (by: Jan 01 2019)
+D | ✗ | kick butt (by: Jan 01 2019)
+D | ✗ | look for smth (by: Jul 05 2018)
+>>>>>>> master
