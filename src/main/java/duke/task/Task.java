@@ -1,5 +1,6 @@
 package duke.task;
 
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -22,6 +23,7 @@ public class Task {
     protected int taskNum;
 
     protected LocalDate deadlineDate;
+
 
 
     /**
