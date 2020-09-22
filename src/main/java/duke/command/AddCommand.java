@@ -7,6 +7,7 @@ import duke.task.Task;
 import duke.task.ToDos;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  * Adds a new task into the Task List.
@@ -38,6 +39,9 @@ public class AddCommand extends Command {
         default:
             break;
         }
+    }
+    public AddCommand(int taskNumber, String nameOfTask, boolean isTaskDone, String type, LocalDate deadlineDate) {
+        this.toAdd = new Deadlines(taskNumber, nameOfTask, isTaskDone, type, deadlineDate);
     }
 
     @Override
