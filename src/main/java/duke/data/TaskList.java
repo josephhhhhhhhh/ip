@@ -46,8 +46,24 @@ public class TaskList {
     }
 
     public String markTaskAsDone(int taskNum) {
-        recordedTask.get(taskNum-1).setTaskStatus(true);
-        return recordedTask.get(taskNum-1).returnMarkedAsDoneStatement();
+        recordedTask.get(taskNum - 1).setTaskStatus(true);
+        return recordedTask.get(taskNum - 1).returnMarkedAsDoneStatement();
     }
+
+    public String findKeywords(String keyword) {
+        String searchResult = "";
+        ArrayList<Integer> indexNumList = new ArrayList<>();
+        for (int i = 0; i < Parser.getOrderAdded() - 1; i++) {
+            if (recordedTask.get(i).getTaskName().contains(keyword)) {
+                indexNumList.add(i);
+            }
+        }
+        for (int i = 0; i < indexNumList.size(); i++) {
+            searchResult = searchResult.concat((i + 1) + ". " + recordedTask.get(indexNumList.get(i)).returnTaskListing()
+                    + ((i == indexNumList.size() - 1) ? "" : "\n"));
+        }
+        return searchResult;
+    }
+
 
 }
