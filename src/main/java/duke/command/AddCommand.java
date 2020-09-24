@@ -40,6 +40,7 @@ public class AddCommand extends Command {
             break;
         }
     }
+
     public AddCommand(int taskNumber, String nameOfTask, boolean isTaskDone, String type, LocalDate deadlineDate) {
         this.toAdd = new Deadlines(taskNumber, nameOfTask, isTaskDone, type, deadlineDate);
     }
@@ -55,10 +56,13 @@ public class AddCommand extends Command {
         } catch (IOException ioe) {
             System.out.println(Messages.IOEXCEPTION_ERROR);
         }
+        Parser.orderAdder();
         String finalMessage = Messages.TASK_ADDER_AFFIRMATION + "\n"
                 + toAdd.returnTaskListing() + "\n"
-                + ((Parser.getOrderAdded() == 1) ? Messages.TASK_ADDER_SINGULAR : Messages.TASK_ADDER_PLURAL);
-        Parser.orderAdder();
+                + ((Parser.getOrderAdded() == 1) ? "Now you have " + Parser.getOrderAdded() + " tasks in the list."
+                : "Now you have " + Parser.getOrderAdded() + " tasks in the list.");
+
+
         return new ResponseToCommand(finalMessage);
     }
 }

@@ -31,16 +31,15 @@ public class Parser {
             if (commandArr.length <= 1) {
                 return new IncorrectCommand("empty command", commandArr[0].toLowerCase());
             } else if (commandArr[0].toLowerCase().equals("deadline") && deadlineExtractor(commandEntered) != null) {
-                return new AddCommand(Parser.getOrderAdded(), taskNameFormatter(commandEntered), false,
+                return new AddCommand(Parser.getOrderAdded()+1, taskNameFormatter(commandEntered), false,
                         taskTypeDecoder(commandEntered), deadlineExtractor(commandEntered));
             }
-            return new AddCommand(Parser.getOrderAdded(), taskNameFormatter(commandEntered), false, taskTypeDecoder(commandEntered));
+            return new AddCommand(Parser.getOrderAdded()+1, taskNameFormatter(commandEntered), false, taskTypeDecoder(commandEntered));
         case "list":
             return new ListCommand();
         case "done":
             return new DoneCommand(commandEntered);
         case "delete":
-            orderSubtractor();
             return new DeleteCommand(commandEntered);
         case "date":
             return new DateCommand(deadlineExtractor(commandEntered));

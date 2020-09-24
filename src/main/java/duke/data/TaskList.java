@@ -26,6 +26,7 @@ public class TaskList {
      */
     public void addTask(Task newTask) {
         recordedTask.add(newTask);
+        updateTaskToFile();
     }
 
     /**
@@ -37,9 +38,10 @@ public class TaskList {
     public String removeTask(int numOfTaskToRemove) {
         String taskListing = recordedTask.get(numOfTaskToRemove - 1).returnTaskListing();
         recordedTask.remove(recordedTask.get(numOfTaskToRemove - 1));
-        for (int i = 0; i < Parser.getOrderAdded() - 1; i++) {
+        for (int i = 0; i < Parser.getOrderAdded(); i++) {
             recordedTask.get(i).setTaskNum(i + 1);
         }
+        updateTaskToFile();
         return taskListing;
     }
 
@@ -50,7 +52,7 @@ public class TaskList {
      */
     public String updateTaskToFile() {
         String updatedText = "";
-        for (int i = 0; i < Parser.getOrderAdded() - 1; i++) {
+        for (int i = 0; i < Parser.getOrderAdded(); i++) {
             updatedText = updatedText.concat(recordedTask.get(i).getCurrentTaskType()
                     + " | " + recordedTask.get(i).taskStatus()
                     + " | " + recordedTask.get(i).getTaskName()) + "\n";
@@ -65,10 +67,10 @@ public class TaskList {
      */
     public String listOfTasks() {
         String listOfTasks = "";
-        for (int i = 0; i < Parser.getOrderAdded() - 1; i++) {
+        for (int i = 0; i < Parser.getOrderAdded(); i++) {
             listOfTasks += recordedTask.get(i).getTaskNum() + ".[" + recordedTask.get(i).getCurrentTaskType()
                     + "]" + "[" + recordedTask.get(i).taskStatus() + "] " + recordedTask.get(i).getTaskName()
-                    + ((i == Parser.getOrderAdded() - 2) ? "" : "\n");
+                    + ((i == Parser.getOrderAdded() - 1) ? "" : "\n");
         }
         return listOfTasks;
     }
@@ -80,6 +82,7 @@ public class TaskList {
 
     /**
      * Iterates through all tasks in the Task List to find deadlines due by the given query date.
+     *
      * @param dateQuery date of deadline being searched for
      * @return String containing a list of all the deadlines that have that date as a deadline
      */

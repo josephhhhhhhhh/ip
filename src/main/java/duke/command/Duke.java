@@ -44,7 +44,7 @@ public class Duke {
     }
 
     /**
-     * Carries out the commad and returns the result.
+     * Carries out the command and returns the result.
      *
      * @param command the user's command
      * @param taskList  the task list being used

@@ -21,8 +21,10 @@ public class DeleteCommand extends Command {
 
     @Override
     public ResponseToCommand execute() {
+        Parser.orderSubtractor();
         String messageOutput = Messages.DELETE_TASK_STATEMENT + "\n" + taskList.removeTask(taskNumToChange) + "\n"
-                + Messages.DELETE_TASK_DECLARATION + (Parser.getOrderAdded() - 1) + Messages.DELETE_TASK_STATEMENT_END;
+                + Messages.DELETE_TASK_DECLARATION + (Parser.getOrderAdded()) + Messages.DELETE_TASK_STATEMENT_END;
+
         String updatedText = taskList.updateTaskToFile();
         try {
             Storage.writeToFile(Messages.SAVE_FILE_PATH, updatedText);
