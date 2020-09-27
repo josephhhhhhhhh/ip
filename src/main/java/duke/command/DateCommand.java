@@ -1,5 +1,9 @@
 package duke.command;
 
+import duke.Duke;
+import duke.common.Messages;
+import duke.exceptions.DukeException;
+
 import java.time.LocalDate;
 
 /**
@@ -15,6 +19,13 @@ public class DateCommand extends Command {
 
     @Override
     public ResponseToCommand execute() {
+        try {
+            if (this.dateQuery == null) {
+                throw new DukeException();
+            }
+        } catch (DukeException de) {
+            return new ResponseToCommand(Messages.DATE_COMMAND_ERROR);
+        }
         return new ResponseToCommand(taskList.matchingDeadlines(dateQuery));
     }
 }

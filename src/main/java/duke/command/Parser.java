@@ -117,22 +117,22 @@ public class Parser {
      * @return the data for the deadline date of type LocalDate
      */
     public LocalDate deadlineExtractor(String commandEntered) {
-        String[] taskCommandArr = commandEntered.split(Messages.BLANK_SPACE, 2);
-        String formattedDate = Messages.EMPTY_STRING;
-        LocalDate dateSet;
-        if (taskCommandArr[1].contains(Messages.SLASH_BY) || taskCommandArr[0].contains(Messages.LOWER_CASE_DATE)) {
-            String taskDueDateString = taskCommandArr[1];
-            String[] taskDueDateArr = taskDueDateString.split(Messages.SLASH_BY, 2);
-            formattedDate = taskDueDateArr[1].trim();
-        } else {
-            return null;
-        }
         try {
+            String[] taskCommandArr = commandEntered.split(Messages.BLANK_SPACE, 2);
+            String formattedDate = Messages.EMPTY_STRING;
+            LocalDate dateSet;
+            if (taskCommandArr[1].contains(Messages.SLASH_BY) || taskCommandArr[0].contains(Messages.LOWER_CASE_DATE)) {
+                String taskDueDateString = taskCommandArr[1];
+                String[] taskDueDateArr = taskDueDateString.split(Messages.SLASH_BY, 2);
+                formattedDate = taskDueDateArr[1].trim();
+            } else {
+                throw new DukeException();
+            }
             dateSet = LocalDate.parse(formattedDate);
+            return dateSet;
         } catch (Exception e) {
             return null;
         }
-        return dateSet;
     }
 
     /**

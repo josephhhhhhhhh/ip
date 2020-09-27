@@ -8,3 +8,4 @@ D | ✗ | for smth /at swens
 E | ✗ | a party (at: zy's)
 E | ✗ | a party (at: school)
 E | ✗ | a party (at: SCHOOL)
+D | ✓ | get christmas present (by: Dec 25 2020)
