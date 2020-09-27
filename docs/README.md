@@ -46,6 +46,7 @@ Welcome to this guide to using **Duke**. **Duke** is a task-management program, 
 
 2. If you wish to look for a task based on a keyword you used in the task description, use the `find` command. The command
    works like so, after you type `find homework`:
+   
    ```
     ____________________________________________________________
     Here are the matching tasks in your list: 
