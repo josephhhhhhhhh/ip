@@ -27,7 +27,6 @@ public class Parser {
      * @return the corresponding command according to the user input
      */
     public Command parseCommand(String commandEntered) {
-
         String[] commandArr = commandEntered.trim().split(Messages.BLANK_SPACE, 2);
 
         switch (commandArr[0].toLowerCase()) {
@@ -98,6 +97,7 @@ public class Parser {
             exactDueDate = Messages.BRACKET_AT_EVENT + taskDueDateArr[1] + Messages.CLOSE_BRACKETS;
             taskCommandArr[1] = taskDueDateArr[0];
         }
+
         try {
             dateSet = LocalDate.parse(formattedDate);
             finalFormattedDate = (taskCommandArr[0].equals(Messages.LOWER_CASE_DEADLINE)) ?
@@ -121,6 +121,7 @@ public class Parser {
             String[] taskCommandArr = commandEntered.split(Messages.BLANK_SPACE, 2);
             String formattedDate = Messages.EMPTY_STRING;
             LocalDate dateSet;
+
             if (taskCommandArr[1].contains(Messages.SLASH_BY) || taskCommandArr[0].contains(Messages.LOWER_CASE_DATE)) {
                 String taskDueDateString = taskCommandArr[1];
                 String[] taskDueDateArr = taskDueDateString.split(Messages.SLASH_BY, 2);
@@ -128,6 +129,7 @@ public class Parser {
             } else {
                 throw new DukeException();
             }
+
             dateSet = LocalDate.parse(formattedDate);
             return dateSet;
         } catch (Exception e) {
@@ -143,6 +145,7 @@ public class Parser {
      */
     public String taskTypeDecoder(String commandEntered) {
         String[] taskCommandArr = commandEntered.split(Messages.BLANK_SPACE, 2);
+
         try {
             switch (taskCommandArr[0]) {
             case Messages.LOWER_CASE_TODO:

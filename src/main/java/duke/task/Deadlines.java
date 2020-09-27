@@ -9,7 +9,6 @@ import java.time.format.DateTimeFormatter;
  * A specific type of task to indicate the task is a deadline.
  */
 public class Deadlines extends Task {
-
     public Deadlines() {
     }
 
@@ -25,6 +24,5 @@ public class Deadlines extends Task {
         return deadlineDate.format(DateTimeFormatter.ofPattern(Messages.LOCAL_DATE_FORMAT));
 
     }
-
 }
 

@@ -7,7 +7,6 @@ import java.time.LocalDate;
 /**
  * Constructs a generic task, consisting of an index number, task description (AKA task name), task type as well as task completion status.
  */
-
 public class Task {
     public final String OPEN_SQUARE_BRACKETS_SPACE_LEFT = " [";
     public final String OPEN_SQUARE_BRACKETS_RIGHT_SPACE = "] ";
@@ -25,9 +24,7 @@ public class Task {
      * The index number of task in the list.
      */
     protected int taskNum;
-
     protected LocalDate deadlineDate;
-
 
     /**
      * An enumeration of the various specific types of tasks.

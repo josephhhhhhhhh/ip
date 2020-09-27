@@ -14,7 +14,6 @@ import duke.ui.TextUi;
  * Initialises the application and initiates interaction with the user.
  */
 public class Duke {
-
     private TextUi ui = new TextUi();
     private TaskList taskList;
 
@@ -43,7 +42,6 @@ public class Duke {
             command = commandParser.parseCommand(commandEntered);
             ResponseToCommand response = carryOutCommand(command, taskList);
             ui.showOutcomeToUser(response);
-
         }
     }
 
@@ -63,5 +61,4 @@ public class Duke {
             return new ResponseToCommand(Messages.CARRY_OUT_COMMAND_ERROR);
         }
     }
-
 }

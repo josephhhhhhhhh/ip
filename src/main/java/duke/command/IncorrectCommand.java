@@ -26,7 +26,8 @@ public class IncorrectCommand extends Command {
     public ResponseToCommand execute() {
         try {
             if (typeOfIncorrectCommand.equals(Messages.INCORRECT_COMMAND_EMPTY)) {
-                String statement = commandType.equals(Messages.LOWER_CASE_EVENT) ? Messages.EMPTY_TASK_ERROR_MESSAGE + N_BLANK : Messages.EMPTY_TASK_ERROR_MESSAGE
+                String statement = commandType.equals(Messages.LOWER_CASE_EVENT) ?
+                        Messages.EMPTY_TASK_ERROR_MESSAGE + N_BLANK : Messages.EMPTY_TASK_ERROR_MESSAGE
                         + Messages.BLANK_SPACE + commandType + Messages.EMPTY_TASK_ERROR_MESSAGE_END;
                 return new ResponseToCommand(statement);
             } else if (typeOfIncorrectCommand.equals(Messages.INCORRECT_COMMAND_UNRECOGNISED)) {

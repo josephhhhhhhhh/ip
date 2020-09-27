@@ -14,8 +14,10 @@ import java.time.LocalDate;
  * Adds a new task into the Task List.
  */
 public class AddCommand extends Command {
-
     private Task toAdd;
+    public final String STATEMENT_END = "Now you have ";
+    public final String STATEMENT_END_TWO_SINGULAR = " task in the list.";
+    public final String STATEMENT_END_TWO_PLURAL = " tasks in the list.";
 
     /**
      * The constructor to add new tasks.
@@ -48,11 +50,9 @@ public class AddCommand extends Command {
 
     @Override
     public ResponseToCommand execute() {
-
         taskList.addTask(toAdd);
 
-        String lineToSave = toAdd.getCurrentTaskType()
-                + Messages.SEPARATOR + toAdd.taskStatus() + Messages.SEPARATOR
+        String lineToSave = toAdd.getCurrentTaskType() + Messages.SEPARATOR + toAdd.taskStatus() + Messages.SEPARATOR
                 + toAdd.getTaskName() + Messages.NEW_LINE;
 
         try {
@@ -65,7 +65,9 @@ public class AddCommand extends Command {
 
         String finalMessage = Messages.TASK_ADDER_AFFIRMATION + Messages.NEW_LINE
                 + toAdd.returnTaskListing() + Messages.NEW_LINE
-                + Messages.ADD_COMMAND_STATEMENT_END;
+                +  ((Parser.getOrderAdded() == 1) ?
+                STATEMENT_END + Parser.getOrderAdded() + STATEMENT_END_TWO_SINGULAR
+                :  STATEMENT_END + Parser.getOrderAdded() + STATEMENT_END_TWO_PLURAL);
 
         return new ResponseToCommand(finalMessage);
     }

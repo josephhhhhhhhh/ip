@@ -1,10 +1,7 @@
-list
-say hi bro
-todo get work done
-deadline look for someone /by tomorrow
-event kick ball /at tembu
-events testing events vs event command /at tembu
-list
-done 5
-list
-bye
+todo say hi
+deadline hwk /by 2020-11-20
+event party /at home
+done 3
+find party
+date /by 2020-11-20
+delete 3

@@ -9,50 +9,44 @@ ____________________________________________________________
 Hello! I'm Duke
 What can I do for you?
 ____________________________________________________________
-____________________________________________________________
-Here are the tasks in your list:
-____________________________________________________________
-____________________________________________________________
-added: say hi bro
-____________________________________________________________
+Enter command:
 ____________________________________________________________
 Got it. I've added this task: 
-  [T][✗] get work done
+ [T][✗] say hi
+Now you have 1 task in the list.
+____________________________________________________________
+Enter command: 
+____________________________________________________________
+Got it. I've added this task: 
+ [D][✗] hwk (by: Nov 20 2020)
 Now you have 2 tasks in the list.
 ____________________________________________________________
+Enter command: 
 ____________________________________________________________
 Got it. I've added this task: 
-  [D][✗] look for someone (by: tomorrow)
+ [E][✗] party (at: home)
 Now you have 3 tasks in the list.
 ____________________________________________________________
-____________________________________________________________
-Got it. I've added this task: 
-  [E][✗] kick ball (at: tembu)
-Now you have 4 tasks in the list.
-____________________________________________________________
-____________________________________________________________
-added: events testing events vs event command /at tembu
-____________________________________________________________
-____________________________________________________________
-Here are the tasks in your list:
-1.[G][✗] say hi bro
-2.[T][✗] get work done
-3.[D][✗] look for someone 
-4.[E][✗] kick ball 
-5.[G][✗] events testing events vs event command /at tembu
-____________________________________________________________
+Enter command: 
 ____________________________________________________________
 Nice! I've marked this task as done: 
-  [✓] events testing events vs event command /at tembu
+  [✓] party (at: home)
 ____________________________________________________________
+Enter command: 
 ____________________________________________________________
-Here are the tasks in your list:
-1.[G][✗] say hi bro
-2.[T][✗] get work done
-3.[D][✗] look for someone 
-4.[E][✗] kick ball 
-5.[G][✓] events testing events vs event command /at tembu
+Here are the matching tasks in your list: 
+1.  [E][✓] party (at: home)
 ____________________________________________________________
+Enter command: 
 ____________________________________________________________
-Bye. Hope to see you again soon!
+Here are the tasks that are due on the queried date: 
+1.  [D][✗] hwk (by: Nov 20 2020)
+____________________________________________________________
+Enter command: 
+____________________________________________________________
+Noted. I've removed this task:
+ [E][✓] party (at: home)
+Now you have: 2 tasks in the list.
+____________________________________________________________
+Enter command: 
 ____________________________________________________________

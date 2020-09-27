@@ -11,7 +11,6 @@ import java.util.ArrayList;
  * A list of tasks.
  */
 public class TaskList {
-
     private final ArrayList<Task> recordedTask;
     public static final String DOT_OPEN_SQUARE_BRACKET = ".[";
     public static final String CLOSE_SQUARE_BRACKET = "]";
@@ -72,11 +71,13 @@ public class TaskList {
      * @return a string with the updated list of tasks as formatted in the bot itself
      */
     public String listOfTasks() {
-        String listOfTasks = Messages.EMPTY_STRING;
+        String listOfTasks = Messages.LIST_TASKS_MESSAGE;
         for (int i = 0; i < Parser.getOrderAdded(); i++) {
-            listOfTasks += recordedTask.get(i).getTaskNum() + DOT_OPEN_SQUARE_BRACKET + recordedTask.get(i).getCurrentTaskType()
-                    + CLOSE_SQUARE_BRACKET + OPEN_SQUARE_BRACKET + recordedTask.get(i).taskStatus() + CLOSE_SQUARE_BRACKET + Messages.BLANK_SPACE
-                    + recordedTask.get(i).getTaskName() + ((i == Parser.getOrderAdded() - 1) ? Messages.EMPTY_STRING : Messages.NEW_LINE);
+            listOfTasks += recordedTask.get(i).getTaskNum() + DOT_OPEN_SQUARE_BRACKET
+                    + recordedTask.get(i).getCurrentTaskType() + CLOSE_SQUARE_BRACKET + OPEN_SQUARE_BRACKET
+                    + recordedTask.get(i).taskStatus() + CLOSE_SQUARE_BRACKET + Messages.BLANK_SPACE
+                    + recordedTask.get(i).getTaskName()
+                    + ((i == Parser.getOrderAdded() - 1) ? Messages.EMPTY_STRING : Messages.NEW_LINE);
         }
         return listOfTasks;
     }
@@ -95,20 +96,24 @@ public class TaskList {
     public String matchingDeadlines(LocalDate dateQuery) {
         String deadlinesMatchingDateQuery = Messages.EMPTY_STRING;
         ArrayList<Integer> indexNumList = new ArrayList<>();
+
         for (Task possibleTask : recordedTask) {
             try {
-                if (possibleTask.getCurrentTaskType().equals(Messages.DEADLINE_D) && possibleTask.getDeadlineDate().equals(dateQuery)) {
+                if (possibleTask.getCurrentTaskType().equals(Messages.DEADLINE_D) &&
+                        possibleTask.getDeadlineDate().equals(dateQuery)) {
                     indexNumList.add(possibleTask.getTaskNum());
                 }
             } catch (Exception ignored) {
             }
         }
+
         for (int i = 0; i < indexNumList.size(); i++) {
             deadlinesMatchingDateQuery = deadlinesMatchingDateQuery.concat((i + 1) + DOT_SPACE
-                    + recordedTask.get(indexNumList.get(i) - 1).returnTaskListing()) + ((i == indexNumList.size() - 1) ? Messages.EMPTY_STRING : Messages.NEW_LINE);
+                    + recordedTask.get(indexNumList.get(i) - 1).returnTaskListing())
+                    + ((i == indexNumList.size() - 1) ? Messages.EMPTY_STRING : Messages.NEW_LINE);
         }
-        return Messages.DEADLINE_QUERY_MESSAGE + deadlinesMatchingDateQuery;
 
+        return Messages.DEADLINE_QUERY_MESSAGE + deadlinesMatchingDateQuery;
     }
 
     /**
@@ -120,16 +125,17 @@ public class TaskList {
     public String findKeywords(String keyword) {
         String searchResult = Messages.EMPTY_STRING;
         ArrayList<Integer> indexNumList = new ArrayList<>();
+
         for (int i = 0; i < Parser.getOrderAdded(); i++) {
             if (recordedTask.get(i).getTaskName().contains(keyword)) {
                 indexNumList.add(i);
             }
         }
+
         for (int i = 0; i < indexNumList.size(); i++) {
             searchResult = searchResult.concat((i + 1) + DOT_SPACE + recordedTask.get(indexNumList.get(i)).returnTaskListing()
                     + ((i == indexNumList.size() - 1) ? Messages.EMPTY_STRING : Messages.NEW_LINE));
         }
         return searchResult;
     }
-
 }
