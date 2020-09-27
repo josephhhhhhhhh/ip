@@ -1,13 +1,13 @@
-#User Guide
+# User Guide
 Welcome to this guide to using **Duke**. **Duke** is a task-management program, capable of storing tasks to help the user keep track of things that need to be done.
 **Duke** has a few functions to help the user with task-management.
 
-##Setting up
+## Setting up
 - There needs to be a file labeled 'data' in the same location as the Duke.jar file
 - This 'data' file should contain a 'duke.txt' file.
 - On first use, it is best if this file is empty so that there are no errors in using the program.
 
-##Adding a task
+## Adding a task
 1. To begin with adding a new task to the list, the user may choose to type one of three commands:
     `todo`,`deadline` or `event`. To use the command simply type the command followed by the task description.
     If done correctly, typing `todo homework for school` in the command-line interface should result in a response
@@ -41,7 +41,7 @@ Welcome to this guide to using **Duke**. **Duke** is a task-management program, 
    your event. It should show up as `(at: <insert event location here>)`. In this case, the event location does not need
    to be formatted in any way.
    
-##Accessing your list of tasks
+## Accessing your list of tasks
 1. Type `list` to get a list of all the tasks stored in your program.
 
 2. If you wish to look for a task based on a keyword you used in the task description, use the `find` command. The command
@@ -62,7 +62,7 @@ Welcome to this guide to using **Duke**. **Duke** is a task-management program, 
    ____________________________________________________________
    ```
 
-##Marking tasks as done
+## Marking tasks as done
 1. After listing out the tasks you have, you will notice each task has a task number. That task number
    refers to the corresponding task beside it, and can be used in the `done` command to mark a task being
    complete. Simply type the number of the task you are referring to after typing `done`, and that task
@@ -75,7 +75,7 @@ Welcome to this guide to using **Duke**. **Duke** is a task-management program, 
    ____________________________________________________________
    ```
 
-##Deleting tasks
+## Deleting tasks
 1. It's really simple. Like the done task earlier, simply type the corresponding task number after `delete`
    to delete that task. Here's what `delete 1` would show:
    ```
@@ -86,11 +86,11 @@ Welcome to this guide to using **Duke**. **Duke** is a task-management program, 
    ____________________________________________________________
    ```
 
-##HELP! I CANNOT REMEMBER ANY OF THE THINGS YOU HAVE WRITTEN ABOVE
+## HELP! I CANNOT REMEMBER ANY OF THE THINGS YOU HAVE WRITTEN ABOVE
 1. Worry not, just type `help` into the command-line interface, and all the commands will be shown to you
    in a neat summary. Cool right?
    
-##Saying bye-bye
+## Saying bye-bye
 1. Type in `bye` if you wish to terminate the program. It's really that simple.
 
 
