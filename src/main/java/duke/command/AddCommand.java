@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.common.Messages;
+import duke.data.Storage;
 import duke.task.Deadlines;
 import duke.task.Events;
 import duke.task.Task;
@@ -27,13 +28,13 @@ public class AddCommand extends Command {
      */
     public AddCommand(int taskNumber, String nameOfTask, boolean isTaskDone, String type) {
         switch (type) {
-        case "T":
+        case Messages.TODO_T:
             this.toAdd = new ToDos(taskNumber, nameOfTask, isTaskDone, type);
             break;
-        case "E":
+        case Messages.EVENT_E:
             this.toAdd = new Events(taskNumber, nameOfTask, isTaskDone, type);
             break;
-        case "D":
+        case Messages.DEADLINE_D:
             this.toAdd = new Deadlines(taskNumber, nameOfTask, isTaskDone, type);
             break;
         default:
@@ -47,21 +48,24 @@ public class AddCommand extends Command {
 
     @Override
     public ResponseToCommand execute() {
+
         taskList.addTask(toAdd);
+
         String lineToSave = toAdd.getCurrentTaskType()
-                + " | " + toAdd.taskStatus() + " | "
-                + toAdd.getTaskName() + "\n";
+                + Messages.SEPARATOR + toAdd.taskStatus() + Messages.SEPARATOR
+                + toAdd.getTaskName() + Messages.NEW_LINE;
+
         try {
             Storage.appendToFile(Messages.SAVE_FILE_PATH, lineToSave);
         } catch (IOException ioe) {
             System.out.println(Messages.IOEXCEPTION_ERROR);
         }
-        Parser.orderAdder();
-        String finalMessage = Messages.TASK_ADDER_AFFIRMATION + "\n"
-                + toAdd.returnTaskListing() + "\n"
-                + ((Parser.getOrderAdded() == 1) ? "Now you have " + Parser.getOrderAdded() + " tasks in the list."
-                : "Now you have " + Parser.getOrderAdded() + " tasks in the list.");
 
+        Parser.orderAdder();
+
+        String finalMessage = Messages.TASK_ADDER_AFFIRMATION + Messages.NEW_LINE
+                + toAdd.returnTaskListing() + Messages.NEW_LINE
+                + Messages.ADD_COMMAND_STATEMENT_END;
 
         return new ResponseToCommand(finalMessage);
     }

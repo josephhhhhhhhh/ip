@@ -1,6 +1,7 @@
 package duke.data;
 
 import duke.command.Parser;
+import duke.common.Messages;
 import duke.task.Task;
 
 import java.time.LocalDate;
@@ -10,7 +11,12 @@ import java.util.ArrayList;
  * A list of tasks.
  */
 public class TaskList {
+
     private final ArrayList<Task> recordedTask;
+    public static final String DOT_OPEN_SQUARE_BRACKET = ".[";
+    public static final String CLOSE_SQUARE_BRACKET = "]";
+    public static final String OPEN_SQUARE_BRACKET = "[";
+    public static final String DOT_SPACE = ". ";
 
     /**
      * Constructs an empty Task List.
@@ -51,11 +57,11 @@ public class TaskList {
      * @return a string with the updated list of tasks in the save file format
      */
     public String updateTaskToFile() {
-        String updatedText = "";
+        String updatedText = Messages.EMPTY_STRING;
         for (int i = 0; i < Parser.getOrderAdded(); i++) {
             updatedText = updatedText.concat(recordedTask.get(i).getCurrentTaskType()
-                    + " | " + recordedTask.get(i).taskStatus()
-                    + " | " + recordedTask.get(i).getTaskName()) + "\n";
+                    + Messages.SEPARATOR + recordedTask.get(i).taskStatus()
+                    + Messages.SEPARATOR + recordedTask.get(i).getTaskName()) + Messages.NEW_LINE;
         }
         return updatedText;
     }
@@ -66,11 +72,11 @@ public class TaskList {
      * @return a string with the updated list of tasks as formatted in the bot itself
      */
     public String listOfTasks() {
-        String listOfTasks = "";
+        String listOfTasks = Messages.EMPTY_STRING;
         for (int i = 0; i < Parser.getOrderAdded(); i++) {
-            listOfTasks += recordedTask.get(i).getTaskNum() + ".[" + recordedTask.get(i).getCurrentTaskType()
-                    + "]" + "[" + recordedTask.get(i).taskStatus() + "] " + recordedTask.get(i).getTaskName()
-                    + ((i == Parser.getOrderAdded() - 1) ? "" : "\n");
+            listOfTasks += recordedTask.get(i).getTaskNum() + DOT_OPEN_SQUARE_BRACKET + recordedTask.get(i).getCurrentTaskType()
+                    + CLOSE_SQUARE_BRACKET + OPEN_SQUARE_BRACKET + recordedTask.get(i).taskStatus() + CLOSE_SQUARE_BRACKET + Messages.BLANK_SPACE
+                    + recordedTask.get(i).getTaskName() + ((i == Parser.getOrderAdded() - 1) ? Messages.EMPTY_STRING : Messages.NEW_LINE);
         }
         return listOfTasks;
     }
@@ -87,21 +93,21 @@ public class TaskList {
      * @return String containing a list of all the deadlines that have that date as a deadline
      */
     public String matchingDeadlines(LocalDate dateQuery) {
-        String deadlinesMatchingDateQuery = "";
+        String deadlinesMatchingDateQuery = Messages.EMPTY_STRING;
         ArrayList<Integer> indexNumList = new ArrayList<>();
         for (Task possibleTask : recordedTask) {
             try {
-                if (possibleTask.getCurrentTaskType().equals("D") && possibleTask.getDeadlineDate().equals(dateQuery)) {
+                if (possibleTask.getCurrentTaskType().equals(Messages.DEADLINE_D) && possibleTask.getDeadlineDate().equals(dateQuery)) {
                     indexNumList.add(possibleTask.getTaskNum());
                 }
             } catch (Exception ignored) {
             }
         }
         for (int i = 0; i < indexNumList.size(); i++) {
-            deadlinesMatchingDateQuery = deadlinesMatchingDateQuery.concat((i + 1) + ". "
-                    + recordedTask.get(indexNumList.get(i) - 1).returnTaskListing()) + ((i == indexNumList.size() - 1) ? "" : "\n");
+            deadlinesMatchingDateQuery = deadlinesMatchingDateQuery.concat((i + 1) + DOT_SPACE
+                    + recordedTask.get(indexNumList.get(i) - 1).returnTaskListing()) + ((i == indexNumList.size() - 1) ? Messages.EMPTY_STRING : Messages.NEW_LINE);
         }
-        return "Here are the tasks that are due on the queried date: \n" + deadlinesMatchingDateQuery;
+        return Messages.DEADLINE_QUERY_MESSAGE + deadlinesMatchingDateQuery;
 
     }
 
@@ -112,19 +118,18 @@ public class TaskList {
      * @return String containing a list of tasks with the keyword in their names
      */
     public String findKeywords(String keyword) {
-        String searchResult = "";
+        String searchResult = Messages.EMPTY_STRING;
         ArrayList<Integer> indexNumList = new ArrayList<>();
-        for (int i = 0; i < Parser.getOrderAdded() - 1; i++) {
+        for (int i = 0; i < Parser.getOrderAdded(); i++) {
             if (recordedTask.get(i).getTaskName().contains(keyword)) {
                 indexNumList.add(i);
             }
         }
         for (int i = 0; i < indexNumList.size(); i++) {
-            searchResult = searchResult.concat((i + 1) + ". " + recordedTask.get(indexNumList.get(i)).returnTaskListing()
-                    + ((i == indexNumList.size() - 1) ? "" : "\n"));
+            searchResult = searchResult.concat((i + 1) + DOT_SPACE + recordedTask.get(indexNumList.get(i)).returnTaskListing()
+                    + ((i == indexNumList.size() - 1) ? Messages.EMPTY_STRING : Messages.NEW_LINE));
         }
         return searchResult;
     }
-
 
 }

@@ -1,5 +1,9 @@
-package duke.command;
+package duke;
 
+import duke.command.Command;
+import duke.command.Parser;
+import duke.command.ResponseToCommand;
+import duke.data.Storage;
 import duke.common.Messages;
 import duke.data.TaskList;
 import duke.ui.TextUi;
@@ -36,7 +40,7 @@ public class Duke {
 
         while (commandParser.notBye) {
             String commandEntered = ui.readUserInput();
-            command = commandParser.parseCommand(commandEntered.toLowerCase());
+            command = commandParser.parseCommand(commandEntered);
             ResponseToCommand response = carryOutCommand(command, taskList);
             ui.showOutcomeToUser(response);
 
@@ -46,8 +50,8 @@ public class Duke {
     /**
      * Carries out the command and returns the result.
      *
-     * @param command the user's command
-     * @param taskList  the task list being used
+     * @param command  the user's command
+     * @param taskList the task list being used
      * @return the outcome of the execution of the command
      */
     private ResponseToCommand carryOutCommand(Command command, TaskList taskList) {

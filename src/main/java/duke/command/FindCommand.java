@@ -20,7 +20,7 @@ public class FindCommand extends Command {
     @Override
     public ResponseToCommand execute() {
         searchResult = taskList.findKeywords(keyword);
-        String messageOutput = "Here are the matching tasks in your list: \n" + searchResult;
+        String messageOutput = Messages.FIND_COMMAND_FIRST_PART + searchResult;
         return new ResponseToCommand(messageOutput);
     }
 }

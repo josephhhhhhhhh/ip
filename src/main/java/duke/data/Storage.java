@@ -1,7 +1,6 @@
-package duke.command;
+package duke.data;
 
 import duke.common.Messages;
-import duke.data.TaskList;
 import duke.task.Deadlines;
 import duke.task.Events;
 import duke.task.Task;
@@ -21,6 +20,8 @@ import java.util.Scanner; // Import the Scanner class to read text files
  * the Task List is updated.
  */
 public class Storage {
+    public static final String BY_COLON = "by:";
+
     /**
      * Overwrites any text in the file.
      *
@@ -28,7 +29,7 @@ public class Storage {
      * @param textToAdd text to overwrite the existing text on the file
      * @throws IOException if file does not exist, or there are issues accessing it
      */
-    protected static void writeToFile(String filePath, String textToAdd) throws IOException {
+    public static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);
         fw.close();
@@ -41,7 +42,7 @@ public class Storage {
      * @param textToAppend text to append to the existing text on the file
      * @throws IOException if file does not exist, or there are issues accessing it
      */
-    protected static void appendToFile(String filePath, String textToAppend) throws IOException {
+    public static void appendToFile(String filePath, String textToAppend) throws IOException {
         FileWriter fw = new FileWriter(filePath, true);
         fw.write(textToAppend);
         fw.close();
@@ -54,7 +55,8 @@ public class Storage {
      * @param taskList the task list which is to hold the tasks
      * @return the number of tasks added into the Task List from the save file
      */
-    protected static int readFromFile(String filePath, TaskList taskList) {
+    public static int readFromFile(String filePath, TaskList taskList) {
+
         int i = 0;
         try {
             File myObj = new File(filePath);
@@ -62,27 +64,27 @@ public class Storage {
             while (myReader.hasNextLine()) {
                 boolean isItDone = false;
                 String data = myReader.nextLine();
-                String[] dataArr = data.split(" | ", 5);
-                if (dataArr[2].contains("\u2713")) {
+                String[] dataArr = data.split(Messages.SEPARATOR, 5);
+                if (dataArr[2].contains(Messages.TICK)) {
                     isItDone = true;
                 }
                 i++;
                 Task newTask = new Task();
-                if (dataArr[0].contains("T")) {
+                if (dataArr[0].contains(Messages.TODO_T)) {
                     newTask = new ToDos(i, dataArr[4], isItDone, dataArr[0]);
-                } else if (dataArr[0].contains("D") && !dataArr[4].contains("(by:")) {
+                } else if (dataArr[0].contains(Messages.DEADLINE_D) && !dataArr[4].contains(Messages.BRACKET_BY_DEADLINE)) {
                     newTask = new Deadlines(i, dataArr[4], isItDone, dataArr[0]);
-                } else if (dataArr[0].contains("D") && dataArr[4].contains("(by:")){
+                } else if (dataArr[0].contains(Messages.DEADLINE_D) && dataArr[4].contains(Messages.BRACKET_BY_DEADLINE)) {
                     try {
-                        String[] dateArr = dataArr[4].split("by:", 2);
-                        String exactDate = dateArr[1].trim().substring(0, dateArr[1].indexOf(")")-1).trim();
-                        DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+                        String[] dateArr = dataArr[4].split(BY_COLON, 2);
+                        String exactDate = dateArr[1].trim().substring(0, dateArr[1].indexOf(Messages.CLOSE_BRACKETS) - 1).trim();
+                        DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern(Messages.LOCAL_DATE_FORMAT);
                         LocalDate formattedDate = LocalDate.parse(exactDate, dtFormatter);
                         newTask = new Deadlines(i, dataArr[4], isItDone, dataArr[0], formattedDate);
                     } catch (Exception e) {
                         newTask = new Deadlines(i, dataArr[4], isItDone, dataArr[0]);
                     }
-                } else if (dataArr[0].contains("E")) {
+                } else if (dataArr[0].contains(Messages.EVENT_E)) {
                     newTask = new Events(i, dataArr[4], isItDone, dataArr[0]);
                 }
                 taskList.addTask(newTask);

@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.common.Messages;
+import duke.data.Storage;
 
 import java.io.IOException;
 
@@ -8,7 +9,7 @@ import java.io.IOException;
  * Marks a task listing as completed, according to the index number of the task passed.
  */
 public class DoneCommand extends Command {
-
+    
     int taskNumToChange;
 
     public DoneCommand(String commandEntered) {
@@ -21,7 +22,7 @@ public class DoneCommand extends Command {
     }
 
     public ResponseToCommand execute() {
-        String messageOutput = Messages.MARKED_TASKS_DONE_MESSAGE + "\n"
+        String messageOutput = Messages.MARKED_TASKS_DONE_MESSAGE + Messages.NEW_LINE
                 + taskList.markTaskAsDone(taskNumToChange);
         String updatedText = taskList.updateTaskToFile();
         try {

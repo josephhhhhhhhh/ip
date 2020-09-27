@@ -1,14 +1,18 @@
 package duke.task;
 
+import duke.common.Messages;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 /**
  * Constructs a generic task, consisting of an index number, task description (AKA task name), task type as well as task completion status.
  */
 
 public class Task {
+    public final String OPEN_SQUARE_BRACKETS_SPACE_LEFT = " [";
+    public final String OPEN_SQUARE_BRACKETS_RIGHT_SPACE = "] ";
+    public final String BACK_TO_BACK_SQUARE_BRACKETS = "][";
+
     /**
      * An indicator of task completion.
      */
@@ -23,7 +27,6 @@ public class Task {
     protected int taskNum;
 
     protected LocalDate deadlineDate;
-
 
 
     /**
@@ -47,6 +50,7 @@ public class Task {
         this.taskDone = isTaskDone;
         setTaskType(type);
     }
+
     public Task(int taskNumber, String nameOfTask, boolean isTaskDone, String type, LocalDate deadlineDate) {
         this.taskName = nameOfTask;
         this.taskNum = taskNumber;
@@ -62,13 +66,13 @@ public class Task {
      */
     public void setTaskType(String typeOfTask) {
         switch (typeOfTask) {
-        case "T":
+        case Messages.TODO_T:
             currentTaskType = taskType.T;
             break;
-        case "D":
+        case Messages.DEADLINE_D:
             currentTaskType = taskType.D;
             break;
-        case "E":
+        case Messages.EVENT_E:
             currentTaskType = taskType.E;
             break;
         default:
@@ -82,16 +86,16 @@ public class Task {
      * @return string output indicating current task type of a given task
      */
     public String getCurrentTaskType() {
-        String currTaskType = "Unknown";
+        String currTaskType = Messages.EMPTY_STRING;
         switch (currentTaskType) {
         case T:
-            currTaskType = "T";
+            currTaskType = Messages.TODO_T;
             break;
         case D:
-            currTaskType = "D";
+            currTaskType = Messages.DEADLINE_D;
             break;
         case E:
-            currTaskType = "E";
+            currTaskType = Messages.EVENT_E;
             break;
         default:
             break;
@@ -160,9 +164,9 @@ public class Task {
      */
     public String taskStatus() {
         if (isTaskDone()) {
-            return "\u2713";
+            return Messages.TICK;
         } else {
-            return "\u2717";
+            return Messages.CROSS;
         }
     }
 
@@ -172,7 +176,7 @@ public class Task {
      * @return String output containing task type, completion status and description
      */
     public String returnTaskListing() {
-        return " [" + getCurrentTaskType() + "][" + taskStatus() + "] " + getTaskName();
+        return OPEN_SQUARE_BRACKETS_SPACE_LEFT + getCurrentTaskType() + BACK_TO_BACK_SQUARE_BRACKETS + taskStatus() + OPEN_SQUARE_BRACKETS_RIGHT_SPACE + getTaskName();
     }
 
     /**
@@ -181,7 +185,7 @@ public class Task {
      * @return String output containing task completion status and task description
      */
     public String returnMarkedAsDoneStatement() {
-        return "  [\u2713] " + getTaskName();
+        return Messages.BLANK_SPACE + OPEN_SQUARE_BRACKETS_SPACE_LEFT + Messages.TICK + OPEN_SQUARE_BRACKETS_RIGHT_SPACE + getTaskName();
     }
 
     public LocalDate getDeadlineDate() {

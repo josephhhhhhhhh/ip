@@ -13,6 +13,8 @@ import java.util.Scanner;
 public class TextUi {
     private final Scanner in;
     private final PrintStream out;
+    public static final String AWAIT_COMMAND = "Enter command: ";
+    public static final String WELCOME_MESSAGE_FIRST_PART = "Hello from\n";
 
     public TextUi() {
         this(System.in, System.out);
@@ -29,9 +31,8 @@ public class TextUi {
      * @return string output of command entered
      */
     public String readUserInput() {
-        out.print("Enter command: ");
-        String fullInputLine = in.nextLine();
-        return fullInputLine;
+        out.print(AWAIT_COMMAND);
+        return in.nextLine();
     }
 
     /**
@@ -40,7 +41,7 @@ public class TextUi {
      * @param message string output of a message to be displayed to user in the desired format
      */
     public void showToUser(String message) {
-        out.println(Messages.LINE_DIVIDER + "\n" + message + "\n" + Messages.LINE_DIVIDER);
+        out.println(Messages.LINE_DIVIDER + Messages.NEW_LINE + message + Messages.NEW_LINE + Messages.LINE_DIVIDER);
     }
 
     /**
@@ -56,7 +57,7 @@ public class TextUi {
      * Prints a message to welcome the user.
      */
     public void printHelloMessage() {
-        out.println("Hello from\n" + Messages.LOGO);
+        out.println(WELCOME_MESSAGE_FIRST_PART + Messages.LOGO);
         showToUser(Messages.HELLO_MESSAGE);
     }
 }

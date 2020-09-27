@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.common.Messages;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -7,6 +9,7 @@ import java.time.format.DateTimeFormatter;
  * A specific type of task to indicate the task is a deadline.
  */
 public class Deadlines extends Task {
+
     public Deadlines() {
     }
 
@@ -19,7 +22,7 @@ public class Deadlines extends Task {
     }
 
     public String getDate() {
-        return deadlineDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+        return deadlineDate.format(DateTimeFormatter.ofPattern(Messages.LOCAL_DATE_FORMAT));
 
     }
 

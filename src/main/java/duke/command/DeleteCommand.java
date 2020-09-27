@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.common.Messages;
+import duke.data.Storage;
 
 import java.io.IOException;
 
@@ -22,7 +23,7 @@ public class DeleteCommand extends Command {
     @Override
     public ResponseToCommand execute() {
         Parser.orderSubtractor();
-        String messageOutput = Messages.DELETE_TASK_STATEMENT + "\n" + taskList.removeTask(taskNumToChange) + "\n"
+        String messageOutput = Messages.DELETE_TASK_STATEMENT + Messages.NEW_LINE + taskList.removeTask(taskNumToChange) + Messages.NEW_LINE
                 + Messages.DELETE_TASK_DECLARATION + (Parser.getOrderAdded()) + Messages.DELETE_TASK_STATEMENT_END;
 
         String updatedText = taskList.updateTaskToFile();

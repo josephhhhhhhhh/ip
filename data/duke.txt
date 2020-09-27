@@ -3,3 +3,8 @@ T | ✓ | hihihi
 T | ✗ | 4
 T | ✗ | 6
 T | ✗ | 7
+D | ✗ | to do smth (by: Jan 01 2019)
+D | ✗ | for smth /at swens
+E | ✗ | a party (at: zy's)
+E | ✗ | a party (at: school)
+E | ✗ | a party (at: SCHOOL)

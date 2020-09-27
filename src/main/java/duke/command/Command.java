@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.common.Messages;
 import duke.data.TaskList;
 
 /**
@@ -15,7 +16,7 @@ public class Command {
      * Carries out the command and returns the outcome of the execution.
      */
     public ResponseToCommand execute() {
-        throw new UnsupportedOperationException("This method should be implemented by child classes.");
+        throw new UnsupportedOperationException(Messages.COMMAND_ABSTRACT_METHOD_ERROR);
     }
 
     /**
