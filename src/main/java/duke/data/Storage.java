@@ -57,7 +57,7 @@ public class Storage {
      */
     public static int readFromFile(String filePath, TaskList taskList) {
 
-        int i = 0;
+        int numberOfTasksStored = 0;
         try {
             File myObj = new File(filePath);
             Scanner myReader = new Scanner(myObj);
@@ -68,24 +68,24 @@ public class Storage {
                 if (dataArr[2].contains(Messages.TICK)) {
                     isItDone = true;
                 }
-                i++;
+                numberOfTasksStored++;
                 Task newTask = new Task();
                 if (dataArr[0].contains(Messages.TODO_T)) {
-                    newTask = new ToDos(i, dataArr[4], isItDone, dataArr[0]);
+                    newTask = new ToDos(numberOfTasksStored, dataArr[4], isItDone, dataArr[0]);
                 } else if (dataArr[0].contains(Messages.DEADLINE_D) && !dataArr[4].contains(Messages.BRACKET_BY_DEADLINE)) {
-                    newTask = new Deadlines(i, dataArr[4], isItDone, dataArr[0]);
+                    newTask = new Deadlines(numberOfTasksStored, dataArr[4], isItDone, dataArr[0]);
                 } else if (dataArr[0].contains(Messages.DEADLINE_D) && dataArr[4].contains(Messages.BRACKET_BY_DEADLINE)) {
                     try {
                         String[] dateArr = dataArr[4].split(BY_COLON, 2);
                         String exactDate = dateArr[1].trim().substring(0, dateArr[1].indexOf(Messages.CLOSE_BRACKETS) - 1).trim();
                         DateTimeFormatter dtFormatter = DateTimeFormatter.ofPattern(Messages.LOCAL_DATE_FORMAT);
                         LocalDate formattedDate = LocalDate.parse(exactDate, dtFormatter);
-                        newTask = new Deadlines(i, dataArr[4], isItDone, dataArr[0], formattedDate);
+                        newTask = new Deadlines(numberOfTasksStored, dataArr[4], isItDone, dataArr[0], formattedDate);
                     } catch (Exception e) {
-                        newTask = new Deadlines(i, dataArr[4], isItDone, dataArr[0]);
+                        newTask = new Deadlines(numberOfTasksStored, dataArr[4], isItDone, dataArr[0]);
                     }
                 } else if (dataArr[0].contains(Messages.EVENT_E)) {
-                    newTask = new Events(i, dataArr[4], isItDone, dataArr[0]);
+                    newTask = new Events(numberOfTasksStored, dataArr[4], isItDone, dataArr[0]);
                 }
                 taskList.addTask(newTask);
 
@@ -93,7 +93,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             System.out.println(Messages.FILE_NOT_FOUND_ERROR);
         }
-        return i;
+        return numberOfTasksStored;
     }
 
 

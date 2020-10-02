@@ -1,2 +1,4 @@
 T | ✗ | say hi
-D | ✗ | hwk (by: Nov 20 2020)
+D | ✓ | hwk (by: Nov 20 2020)
+T | ✗ | say hi
+T | ✗ | something /by tmr

@@ -19,6 +19,7 @@ public class Parser {
     public static int orderAdded = 0;
     public boolean notBye = true;
     public static boolean firstTimeEntry = true;
+    public static final int numOfWords = 2;
 
     /**
      * Parses user input into a command to be carried out.
@@ -27,7 +28,7 @@ public class Parser {
      * @return the corresponding command according to the user input
      */
     public Command parseCommand(String commandEntered) {
-        String[] commandArr = commandEntered.trim().split(Messages.BLANK_SPACE, 2);
+        String[] commandArr = commandEntered.trim().split(Messages.BLANK_SPACE, numOfWords);
 
         switch (commandArr[0].toLowerCase()) {
         case Messages.LOWER_CASE_TODO:
@@ -35,7 +36,8 @@ public class Parser {
         case Messages.LOWER_CASE_EVENT:
             if (commandArr.length <= 1) {
                 return new IncorrectCommand(Messages.INCORRECT_COMMAND_EMPTY, commandArr[0].toLowerCase());
-            } else if (commandArr[0].toLowerCase().equals(Messages.LOWER_CASE_DEADLINE) && deadlineExtractor(commandEntered) != null) {
+            } else if (commandArr[0].toLowerCase().equals(Messages.LOWER_CASE_DEADLINE)
+                    && deadlineExtractor(commandEntered) != null) {
                 return new AddCommand(Parser.getOrderAdded() + 1, taskNameFormatter(commandEntered), false,
                         taskTypeDecoder(commandEntered), deadlineExtractor(commandEntered));
             }
@@ -79,7 +81,7 @@ public class Parser {
      * @return a string containing the task name in correct formatting
      */
     public String taskNameFormatter(String commandEntered) {
-        String[] taskCommandArr = commandEntered.split(Messages.BLANK_SPACE, 2);
+        String[] taskCommandArr = commandEntered.split(Messages.BLANK_SPACE, numOfWords);
         String exactDueDate = Messages.EMPTY_STRING;
         String formattedDate = Messages.EMPTY_STRING;
         String finalFormattedDate = Messages.EMPTY_STRING;
@@ -87,13 +89,14 @@ public class Parser {
 
         if (taskCommandArr[1].contains(Messages.SLASH_BY) && taskCommandArr[0].contains(Messages.LOWER_CASE_DEADLINE)) {
             String taskDueDateString = taskCommandArr[1];
-            String[] taskDueDateArr = taskDueDateString.split(Messages.SLASH_BY, 2);
+            String[] taskDueDateArr = taskDueDateString.split(Messages.SLASH_BY, numOfWords);
             formattedDate = taskDueDateArr[1].trim();
             exactDueDate = Messages.BRACKET_BY_DEADLINE + taskDueDateArr[1] + Messages.CLOSE_BRACKETS;
             taskCommandArr[1] = taskDueDateArr[0];
-        } else if (taskCommandArr[1].contains(Messages.SLASH_AT) && taskCommandArr[0].contains(Messages.LOWER_CASE_EVENT)) {
+        } else if (taskCommandArr[1].contains(Messages.SLASH_AT)
+                && taskCommandArr[0].contains(Messages.LOWER_CASE_EVENT)) {
             String taskDueDateString = taskCommandArr[1];
-            String[] taskDueDateArr = taskDueDateString.split(Messages.SLASH_AT, 2);
+            String[] taskDueDateArr = taskDueDateString.split(Messages.SLASH_AT, numOfWords);
             exactDueDate = Messages.BRACKET_AT_EVENT + taskDueDateArr[1] + Messages.CLOSE_BRACKETS;
             taskCommandArr[1] = taskDueDateArr[0];
         }
@@ -101,7 +104,9 @@ public class Parser {
         try {
             dateSet = LocalDate.parse(formattedDate);
             finalFormattedDate = (taskCommandArr[0].equals(Messages.LOWER_CASE_DEADLINE)) ?
-                    Messages.BRACKET_BY_DEADLINE + dateSet.format(DateTimeFormatter.ofPattern(Messages.LOCAL_DATE_FORMAT)) + Messages.CLOSE_BRACKETS : exactDueDate;
+                    Messages.BRACKET_BY_DEADLINE
+                            + dateSet.format(DateTimeFormatter.ofPattern(Messages.LOCAL_DATE_FORMAT))
+                            + Messages.CLOSE_BRACKETS : exactDueDate;
         } catch (Exception ignored) {
             finalFormattedDate = exactDueDate;
         }
@@ -118,13 +123,13 @@ public class Parser {
      */
     public LocalDate deadlineExtractor(String commandEntered) {
         try {
-            String[] taskCommandArr = commandEntered.split(Messages.BLANK_SPACE, 2);
+            String[] taskCommandArr = commandEntered.split(Messages.BLANK_SPACE, numOfWords);
             String formattedDate = Messages.EMPTY_STRING;
             LocalDate dateSet;
 
             if (taskCommandArr[1].contains(Messages.SLASH_BY) || taskCommandArr[0].contains(Messages.LOWER_CASE_DATE)) {
                 String taskDueDateString = taskCommandArr[1];
-                String[] taskDueDateArr = taskDueDateString.split(Messages.SLASH_BY, 2);
+                String[] taskDueDateArr = taskDueDateString.split(Messages.SLASH_BY, numOfWords);
                 formattedDate = taskDueDateArr[1].trim();
             } else {
                 throw new DukeException();
@@ -144,7 +149,7 @@ public class Parser {
      * @return a string containing the letter representing the task type
      */
     public String taskTypeDecoder(String commandEntered) {
-        String[] taskCommandArr = commandEntered.split(Messages.BLANK_SPACE, 2);
+        String[] taskCommandArr = commandEntered.split(Messages.BLANK_SPACE, numOfWords);
 
         try {
             switch (taskCommandArr[0]) {

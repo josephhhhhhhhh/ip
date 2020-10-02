@@ -22,7 +22,6 @@ public class Deadlines extends Task {
 
     public String getDate() {
         return deadlineDate.format(DateTimeFormatter.ofPattern(Messages.LOCAL_DATE_FORMAT));
-
     }
 }
 

@@ -30,8 +30,10 @@ public class Messages {
     public static final String FILE_NOT_FOUND_ERROR = "File could not be found.";
     public static final String TASK_TYPE_ERROR = "ERROR: taskTypeDecoder is unable to recognise the taskType input.";
     public static final String DONE_COMMAND_ERROR = "ERROR: done command has malfunctioned.";
-    public static final String DATE_COMMAND_ERROR = "ERROR: date command has malfunctioned.";
-    public static final String FIND_COMMAND_ERROR = "ERROR: find command has malfunctioned.";
+    public static final String DATE_COMMAND_ERROR = "ERROR: date command has malfunctioned.\nRemember to type a date" +
+            " command like this \"date /by <type out a date query in the format YYYY-MM-DD here>\".";
+    public static final String FIND_COMMAND_ERROR = "ERROR: find command has malfunctioned.\nRemember to include a" +
+            " keyword when using the find command, like this \"find <keyword>\".";
     public static final String DELETE_COMMAND_ERROR = "ERROR: delete command has malfunctioned.";
     public static final String CARRY_OUT_COMMAND_ERROR = "ERROR: carryOutCommand has malfunctioned."
             + "\nReturning you to the \"Enter command: \" prompt...";
@@ -52,7 +54,7 @@ public class Messages {
             + "list : Lists out all of the tasks on the list.\n\n"
             + "find <type out search query here>: \n        "
             + "Lists out tasks with the corresponding search query in the task name.\n\n"
-            + "date <type out a date query in the format YYYY-MM-DD here>: \n        "
+            + "date /by <type out a date query in the format YYYY-MM-DD here>: \n        "
             + "Lists out deadlines corresponding to the date query.\n\n"
             + "bye : Exits from the program.";
     public static final String SLASH_BY = "/by";
