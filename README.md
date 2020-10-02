@@ -86,11 +86,11 @@ Welcome to this guide to using **Duke**. **Duke** is a task-management program, 
    ____________________________________________________________
    ```
 
-##HELP! I CANNOT REMEMBER ANY OF THE THINGS YOU HAVE WRITTEN ABOVE
+## HELP! I CANNOT REMEMBER ANY OF THE THINGS YOU HAVE WRITTEN ABOVE
 1. Worry not, just type `help` into the command-line interface, and all the commands will be shown to you
    in a neat summary. Cool right?
    
-##Saying bye-bye
+## Saying bye-bye
 1. Type in `bye` if you wish to terminate the program. It's really that simple.
 
 
